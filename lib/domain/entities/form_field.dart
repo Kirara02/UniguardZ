@@ -5,8 +5,8 @@ part 'form_field.g.dart';
 part 'form_field.freezed.dart';
 
 @freezed
-class FormField with _$FormField {
-  factory FormField({
+class UFormField with _$UFormField {
+  factory UFormField({
     required int id,
     required int formId,
     required int fieldTypeId,
@@ -14,24 +14,18 @@ class FormField with _$FormField {
     required String name,
     required int status,
     int? pickListId,
-    @JsonKey(
-        name: "FormPickList",
-        fromJson: _fromJsonFormPickList,
-        toJson: _toJsonFormPickList)
+    @JsonKey(name: "FormPickList", fromJson: _fromJsonFormPickList, toJson: _toJsonFormPickList)
     List<FormPickList>? formPickList,
-  }) = _FormField;
+  }) = _UFormField;
 
-  factory FormField.fromJson(Map<String, dynamic> json) =>
-      _$FormFieldFromJson(json);
+  factory UFormField.fromJson(Map<String, dynamic> json) => _$UFormFieldFromJson(json);
 }
 
 // Custom converter functions
 List<FormPickList>? _fromJsonFormPickList(dynamic json) {
   if (json == null) return null;
   if (json is List) {
-    return json
-        .map((e) => FormPickList.fromJson(e as Map<String, dynamic>))
-        .toList();
+    return json.map((e) => FormPickList.fromJson(e as Map<String, dynamic>)).toList();
   } else if (json is Map<String, dynamic>) {
     return [FormPickList.fromJson(json)];
   } else {

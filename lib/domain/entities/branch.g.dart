@@ -10,7 +10,7 @@ _$BranchImpl _$$BranchImplFromJson(Map<String, dynamic> json) => _$BranchImpl(
       id: (json['id'] as num).toInt(),
       name: json['name'] as String,
       formFields: (json['FormFields'] as List<dynamic>)
-          .map((e) => FormField.fromJson(e as Map<String, dynamic>))
+          .map((e) => UFormField.fromJson(e as Map<String, dynamic>))
           .toList(),
       checkPointId: (json['checkPointId'] as num?)?.toInt(),
       createdAt: json['createdAt'] as String?,

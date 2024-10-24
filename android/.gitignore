@@ -4,7 +4,6 @@ gradle-wrapper.jar
 /gradlew
 /gradlew.bat
 /local.properties
-/app/scr/main/res/values/strings.xml
 GeneratedPluginRegistrant.java
 
 # Remember to never publicly share your keystore.

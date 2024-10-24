@@ -9,7 +9,7 @@ class Branch with _$Branch {
   factory Branch({
     required int id,
     required String name,
-    @JsonKey(name: "FormFields") required List<FormField> formFields,
+    @JsonKey(name: "FormFields") required List<UFormField> formFields,
     int? checkPointId,
     String? createdAt,
     String? updatedAt,

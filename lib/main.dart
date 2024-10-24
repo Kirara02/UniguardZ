@@ -31,11 +31,20 @@ class MainApp extends ConsumerWidget {
       theme: ThemeData(
         fontFamily: "Poppins",
         brightness: Brightness.dark,
+        useMaterial3: true,
         visualDensity: VisualDensity.adaptivePlatformDensity,
         scaffoldBackgroundColor: AppColors.primary,
         appBarTheme: AppBarTheme(
           backgroundColor: AppColors.primarySoft,
           titleTextStyle: Typogaphy.Regular.copyWith(fontSize: 16),
+        ),
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+            backgroundColor: AppColors.secondary,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(8),
+            ),
+          ),
         ),
       ),
       routeInformationParser: ref.watch(routerProvider).routeInformationParser,

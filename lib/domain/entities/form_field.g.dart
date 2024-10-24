@@ -6,8 +6,8 @@ part of 'form_field.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$FormFieldImpl _$$FormFieldImplFromJson(Map<String, dynamic> json) =>
-    _$FormFieldImpl(
+_$UFormFieldImpl _$$UFormFieldImplFromJson(Map<String, dynamic> json) =>
+    _$UFormFieldImpl(
       id: (json['id'] as num).toInt(),
       formId: (json['formId'] as num).toInt(),
       fieldTypeId: (json['fieldTypeId'] as num).toInt(),
@@ -18,7 +18,7 @@ _$FormFieldImpl _$$FormFieldImplFromJson(Map<String, dynamic> json) =>
       formPickList: _fromJsonFormPickList(json['FormPickList']),
     );
 
-Map<String, dynamic> _$$FormFieldImplToJson(_$FormFieldImpl instance) =>
+Map<String, dynamic> _$$UFormFieldImplToJson(_$UFormFieldImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'formId': instance.formId,

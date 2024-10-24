@@ -56,5 +56,9 @@
 		<string>fetch</string>
 		<string>location</string>
 	</array>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<String>Privacy - Photo Library Usage Description</string>
+	<key>NSCameraUsageDescription </key>
+    <String>Privacy - Camera Usage Description</string>
 </dict>
 </plist>

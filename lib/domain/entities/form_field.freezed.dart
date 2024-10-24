@@ -14,12 +14,12 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
-FormField _$FormFieldFromJson(Map<String, dynamic> json) {
-  return _FormField.fromJson(json);
+UFormField _$UFormFieldFromJson(Map<String, dynamic> json) {
+  return _UFormField.fromJson(json);
 }
 
 /// @nodoc
-mixin _$FormField {
+mixin _$UFormField {
   int get id => throw _privateConstructorUsedError;
   int get formId => throw _privateConstructorUsedError;
   int get fieldTypeId => throw _privateConstructorUsedError;
@@ -35,14 +35,15 @@ mixin _$FormField {
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $FormFieldCopyWith<FormField> get copyWith =>
+  $UFormFieldCopyWith<UFormField> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $FormFieldCopyWith<$Res> {
-  factory $FormFieldCopyWith(FormField value, $Res Function(FormField) then) =
-      _$FormFieldCopyWithImpl<$Res, FormField>;
+abstract class $UFormFieldCopyWith<$Res> {
+  factory $UFormFieldCopyWith(
+          UFormField value, $Res Function(UFormField) then) =
+      _$UFormFieldCopyWithImpl<$Res, UFormField>;
   @useResult
   $Res call(
       {int id,
@@ -60,9 +61,9 @@ abstract class $FormFieldCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$FormFieldCopyWithImpl<$Res, $Val extends FormField>
-    implements $FormFieldCopyWith<$Res> {
-  _$FormFieldCopyWithImpl(this._value, this._then);
+class _$UFormFieldCopyWithImpl<$Res, $Val extends UFormField>
+    implements $UFormFieldCopyWith<$Res> {
+  _$UFormFieldCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -119,11 +120,11 @@ class _$FormFieldCopyWithImpl<$Res, $Val extends FormField>
 }
 
 /// @nodoc
-abstract class _$$FormFieldImplCopyWith<$Res>
-    implements $FormFieldCopyWith<$Res> {
-  factory _$$FormFieldImplCopyWith(
-          _$FormFieldImpl value, $Res Function(_$FormFieldImpl) then) =
-      __$$FormFieldImplCopyWithImpl<$Res>;
+abstract class _$$UFormFieldImplCopyWith<$Res>
+    implements $UFormFieldCopyWith<$Res> {
+  factory _$$UFormFieldImplCopyWith(
+          _$UFormFieldImpl value, $Res Function(_$UFormFieldImpl) then) =
+      __$$UFormFieldImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -142,11 +143,11 @@ abstract class _$$FormFieldImplCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$FormFieldImplCopyWithImpl<$Res>
-    extends _$FormFieldCopyWithImpl<$Res, _$FormFieldImpl>
-    implements _$$FormFieldImplCopyWith<$Res> {
-  __$$FormFieldImplCopyWithImpl(
-      _$FormFieldImpl _value, $Res Function(_$FormFieldImpl) _then)
+class __$$UFormFieldImplCopyWithImpl<$Res>
+    extends _$UFormFieldCopyWithImpl<$Res, _$UFormFieldImpl>
+    implements _$$UFormFieldImplCopyWith<$Res> {
+  __$$UFormFieldImplCopyWithImpl(
+      _$UFormFieldImpl _value, $Res Function(_$UFormFieldImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -161,7 +162,7 @@ class __$$FormFieldImplCopyWithImpl<$Res>
     Object? pickListId = freezed,
     Object? formPickList = freezed,
   }) {
-    return _then(_$FormFieldImpl(
+    return _then(_$UFormFieldImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -200,8 +201,8 @@ class __$$FormFieldImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$FormFieldImpl implements _FormField {
-  _$FormFieldImpl(
+class _$UFormFieldImpl implements _UFormField {
+  _$UFormFieldImpl(
       {required this.id,
       required this.formId,
       required this.fieldTypeId,
@@ -216,8 +217,8 @@ class _$FormFieldImpl implements _FormField {
       final List<FormPickList>? formPickList})
       : _formPickList = formPickList;
 
-  factory _$FormFieldImpl.fromJson(Map<String, dynamic> json) =>
-      _$$FormFieldImplFromJson(json);
+  factory _$UFormFieldImpl.fromJson(Map<String, dynamic> json) =>
+      _$$UFormFieldImplFromJson(json);
 
   @override
   final int id;
@@ -249,14 +250,14 @@ class _$FormFieldImpl implements _FormField {
 
   @override
   String toString() {
-    return 'FormField(id: $id, formId: $formId, fieldTypeId: $fieldTypeId, isRequire: $isRequire, name: $name, status: $status, pickListId: $pickListId, formPickList: $formPickList)';
+    return 'UFormField(id: $id, formId: $formId, fieldTypeId: $fieldTypeId, isRequire: $isRequire, name: $name, status: $status, pickListId: $pickListId, formPickList: $formPickList)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$FormFieldImpl &&
+            other is _$UFormFieldImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.formId, formId) || other.formId == formId) &&
             (identical(other.fieldTypeId, fieldTypeId) ||
@@ -287,19 +288,19 @@ class _$FormFieldImpl implements _FormField {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$FormFieldImplCopyWith<_$FormFieldImpl> get copyWith =>
-      __$$FormFieldImplCopyWithImpl<_$FormFieldImpl>(this, _$identity);
+  _$$UFormFieldImplCopyWith<_$UFormFieldImpl> get copyWith =>
+      __$$UFormFieldImplCopyWithImpl<_$UFormFieldImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$FormFieldImplToJson(
+    return _$$UFormFieldImplToJson(
       this,
     );
   }
 }
 
-abstract class _FormField implements FormField {
-  factory _FormField(
+abstract class _UFormField implements UFormField {
+  factory _UFormField(
       {required final int id,
       required final int formId,
       required final int fieldTypeId,
@@ -311,10 +312,10 @@ abstract class _FormField implements FormField {
           name: "FormPickList",
           fromJson: _fromJsonFormPickList,
           toJson: _toJsonFormPickList)
-      final List<FormPickList>? formPickList}) = _$FormFieldImpl;
+      final List<FormPickList>? formPickList}) = _$UFormFieldImpl;
 
-  factory _FormField.fromJson(Map<String, dynamic> json) =
-      _$FormFieldImpl.fromJson;
+  factory _UFormField.fromJson(Map<String, dynamic> json) =
+      _$UFormFieldImpl.fromJson;
 
   @override
   int get id;
@@ -338,6 +339,6 @@ abstract class _FormField implements FormField {
   List<FormPickList>? get formPickList;
   @override
   @JsonKey(ignore: true)
-  _$$FormFieldImplCopyWith<_$FormFieldImpl> get copyWith =>
+  _$$UFormFieldImplCopyWith<_$UFormFieldImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

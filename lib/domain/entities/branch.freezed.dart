@@ -23,7 +23,7 @@ mixin _$Branch {
   int get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   @JsonKey(name: "FormFields")
-  List<FormField> get formFields => throw _privateConstructorUsedError;
+  List<UFormField> get formFields => throw _privateConstructorUsedError;
   int? get checkPointId => throw _privateConstructorUsedError;
   String? get createdAt => throw _privateConstructorUsedError;
   String? get updatedAt => throw _privateConstructorUsedError;
@@ -43,7 +43,7 @@ abstract class $BranchCopyWith<$Res> {
   $Res call(
       {int id,
       String name,
-      @JsonKey(name: "FormFields") List<FormField> formFields,
+      @JsonKey(name: "FormFields") List<UFormField> formFields,
       int? checkPointId,
       String? createdAt,
       String? updatedAt,
@@ -85,7 +85,7 @@ class _$BranchCopyWithImpl<$Res, $Val extends Branch>
       formFields: null == formFields
           ? _value.formFields
           : formFields // ignore: cast_nullable_to_non_nullable
-              as List<FormField>,
+              as List<UFormField>,
       checkPointId: freezed == checkPointId
           ? _value.checkPointId
           : checkPointId // ignore: cast_nullable_to_non_nullable
@@ -120,7 +120,7 @@ abstract class _$$BranchImplCopyWith<$Res> implements $BranchCopyWith<$Res> {
   $Res call(
       {int id,
       String name,
-      @JsonKey(name: "FormFields") List<FormField> formFields,
+      @JsonKey(name: "FormFields") List<UFormField> formFields,
       int? checkPointId,
       String? createdAt,
       String? updatedAt,
@@ -160,7 +160,7 @@ class __$$BranchImplCopyWithImpl<$Res>
       formFields: null == formFields
           ? _value._formFields
           : formFields // ignore: cast_nullable_to_non_nullable
-              as List<FormField>,
+              as List<UFormField>,
       checkPointId: freezed == checkPointId
           ? _value.checkPointId
           : checkPointId // ignore: cast_nullable_to_non_nullable
@@ -191,7 +191,7 @@ class _$BranchImpl implements _Branch {
   _$BranchImpl(
       {required this.id,
       required this.name,
-      @JsonKey(name: "FormFields") required final List<FormField> formFields,
+      @JsonKey(name: "FormFields") required final List<UFormField> formFields,
       this.checkPointId,
       this.createdAt,
       this.updatedAt,
@@ -206,10 +206,10 @@ class _$BranchImpl implements _Branch {
   final int id;
   @override
   final String name;
-  final List<FormField> _formFields;
+  final List<UFormField> _formFields;
   @override
   @JsonKey(name: "FormFields")
-  List<FormField> get formFields {
+  List<UFormField> get formFields {
     if (_formFields is EqualUnmodifiableListView) return _formFields;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_formFields);
@@ -282,7 +282,7 @@ abstract class _Branch implements Branch {
   factory _Branch(
       {required final int id,
       required final String name,
-      @JsonKey(name: "FormFields") required final List<FormField> formFields,
+      @JsonKey(name: "FormFields") required final List<UFormField> formFields,
       final int? checkPointId,
       final String? createdAt,
       final String? updatedAt,
@@ -297,7 +297,7 @@ abstract class _Branch implements Branch {
   String get name;
   @override
   @JsonKey(name: "FormFields")
-  List<FormField> get formFields;
+  List<UFormField> get formFields;
   @override
   int? get checkPointId;
   @override
