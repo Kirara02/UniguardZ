@@ -5,7 +5,7 @@ import 'package:uniguard_z/domain/entities/result.dart';
 class DummyFormRepository implements FormRepository {
   @override
   Future<Result<List<Branch>>> getForms() async {
-    await Future.delayed(const Duration(seconds: 2));
+    await Future.delayed(const Duration(milliseconds: 1500));
     Map<String, dynamic> branch1 = {
       "CheckPoint": null,
       "FormBranches": [

@@ -3,8 +3,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:uniguard_z/presentation/misc/colors.dart';
 import 'package:uniguard_z/presentation/misc/typography.dart';
 
-class ScanPage extends ConsumerWidget {
-  const ScanPage({super.key});
+class ScanSection extends ConsumerWidget {
+  const ScanSection({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

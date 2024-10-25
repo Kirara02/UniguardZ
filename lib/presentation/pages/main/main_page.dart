@@ -10,10 +10,13 @@ import 'package:uniguard_z/presentation/misc/app_routes.dart';
 import 'package:uniguard_z/presentation/misc/colors.dart';
 import 'package:uniguard_z/presentation/misc/typography.dart';
 import 'package:uniguard_z/presentation/misc/utils.dart';
-import 'package:uniguard_z/presentation/pages/forms/forms_page.dart';
-import 'package:uniguard_z/presentation/pages/home/home_page.dart';
-import 'package:uniguard_z/presentation/pages/scan/scan_page.dart';
-import 'package:uniguard_z/presentation/pages/settings/settings_page.dart';
+import 'package:uniguard_z/presentation/pages/main/sections/activities_section.dart';
+import 'package:uniguard_z/presentation/pages/main/sections/forms_section.dart';
+import 'package:uniguard_z/presentation/pages/main/sections/history_section.dart';
+import 'package:uniguard_z/presentation/pages/main/sections/home_section.dart';
+import 'package:uniguard_z/presentation/pages/main/sections/scan_section.dart';
+import 'package:uniguard_z/presentation/pages/main/sections/settings_section.dart';
+import 'package:uniguard_z/presentation/pages/main/sections/tasks_section.dart';
 import 'package:uniguard_z/presentation/providers/common/page_provider.dart';
 import 'package:uniguard_z/presentation/providers/routes/router_provider.dart';
 import 'package:uniguard_z/presentation/providers/user_data/user_data_provider.dart';
@@ -81,14 +84,41 @@ class _MainPageState extends ConsumerState<MainPage> {
       },
     );
 
-    return SafeArea(
+    return DefaultTabController(
+      length: 2,
       child: Scaffold(
         appBar: AppBar(
           title: Text(selectedPage.title),
           scrolledUnderElevation: 0.0,
+          actions: [
+            IconButton(
+              onPressed: () {},
+              icon: const Icon(
+                Icons.cloud_upload,
+                size: 24,
+              ),
+            ),
+          ],
+          bottom: selectedPage == DrawerPage.history
+              ? TabBar(
+                  indicatorSize: TabBarIndicatorSize.tab,
+                  tabs: const [
+                    Tab(text: "Uploaded"),
+                    Tab(text: "Pending"),
+                  ],
+                  indicatorColor: AppColors.secondarySoft,
+                )
+              : null,
         ),
         drawer: _buildDrawer(context),
-        body: _buildContent(selectedPage),
+        body: selectedPage == DrawerPage.history
+            ? const TabBarView(
+                children: [
+                  Center(child: Text("Content for Uploaded")),
+                  Center(child: Text("Content for Pending")),
+                ],
+              )
+            : _buildContent(selectedPage),
       ),
     );
   }
@@ -249,21 +279,21 @@ class _MainPageState extends ConsumerState<MainPage> {
   Widget _buildContent(DrawerPage selectedPage) {
     switch (selectedPage) {
       case DrawerPage.home:
-        return const HomePage();
+        return const HomeSection();
       case DrawerPage.scan:
-        return const ScanPage();
+        return const ScanSection();
       case DrawerPage.forms:
-        return const FormsPage();
+        return const FormsSection();
       case DrawerPage.tasks:
-        return const HomePage();
+        return const TasksSection();
       case DrawerPage.activityLog:
-        return const HomePage();
+        return const ActivitiesSection();
       case DrawerPage.history:
-        return const HomePage();
+        return const HistorySection();
       case DrawerPage.settings:
-        return const SettingsPage();
+        return const SettingsSection();
       default:
-        return const HomePage();
+        return const HomeSection();
     }
   }
 }

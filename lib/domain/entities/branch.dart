@@ -11,8 +11,8 @@ class Branch with _$Branch {
     required String name,
     @JsonKey(name: "FormFields") required List<UFormField> formFields,
     int? checkPointId,
-    String? createdAt,
-    String? updatedAt,
+    DateTime? createdAt,
+    DateTime? updatedAt,
     int? roleId,
     int? parentBranchId,
   }) = _Branch;

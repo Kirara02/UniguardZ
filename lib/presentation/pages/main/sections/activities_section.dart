@@ -5,34 +5,34 @@ import 'package:uniguard_z/presentation/misc/colors.dart';
 import 'package:uniguard_z/presentation/misc/screen.dart';
 import 'package:uniguard_z/presentation/misc/typography.dart';
 import 'package:uniguard_z/presentation/misc/utils.dart';
-import 'package:uniguard_z/presentation/providers/api/forms_provider.dart';
+import 'package:uniguard_z/presentation/providers/api/activities_provider.dart';
 import 'package:uniguard_z/presentation/providers/routes/router_provider.dart';
 
-class FormsPage extends ConsumerStatefulWidget {
-  const FormsPage({super.key});
+class ActivitiesSection extends ConsumerStatefulWidget {
+  const ActivitiesSection({super.key});
 
   @override
-  FormsPageState createState() => FormsPageState();
+  ConsumerState<ActivitiesSection> createState() => _ActivitiesSectionState();
 }
 
-class FormsPageState extends ConsumerState<FormsPage> {
+class _ActivitiesSectionState extends ConsumerState<ActivitiesSection> {
   @override
   void initState() {
     super.initState();
-    Future.microtask(() => ref.read(formsProvider.notifier).getForms());
+    Future.microtask(() => ref.read(activitiesProvider.notifier).getActivities());
   }
 
   @override
   Widget build(BuildContext context) {
-    final forms = ref.watch(formsProvider);
+    final tasks = ref.watch(activitiesProvider);
 
     return RefreshIndicator(
       onRefresh: () async {
-        ref.read(formsProvider.notifier).getForms();
+        ref.read(activitiesProvider.notifier).getActivities();
       },
       child: ListView(
         children: [
-          forms.when(
+          tasks.when(
             data: (data) {
               if (data.isEmpty) {
                 return const Center(
@@ -46,9 +46,9 @@ class FormsPageState extends ConsumerState<FormsPage> {
                 padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
                 separatorBuilder: (context, index) => const SizedBox(height: 12),
                 itemBuilder: (context, index) {
-                  var form = data[index];
+                  var task = data[index];
                   return InkWell(
-                    onTap: () => ref.read(routerProvider).push(Routes.FORM, extra: form),
+                    onTap: () => ref.read(routerProvider).push(Routes.ACTIVITY, extra: task),
                     child: Container(
                       padding: const EdgeInsets.all(12),
                       decoration: BoxDecoration(
@@ -59,15 +59,15 @@ class FormsPageState extends ConsumerState<FormsPage> {
                       child: Row(
                         children: [
                           Icon(
-                            Icons.description,
+                            Icons.local_activity,
                             size: 24,
                             color: AppColors.grey,
                           ),
                           const SizedBox(width: 8),
                           Text(
-                            form.name,
+                            task.name,
                             style: Typogaphy.Medium.copyWith(
-                              color: AppColors.grey,
+                              color: AppColors.light,
                             ),
                           ),
                           const Spacer(),

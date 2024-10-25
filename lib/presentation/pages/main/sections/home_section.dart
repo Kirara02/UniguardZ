@@ -3,14 +3,14 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:uniguard_z/presentation/misc/typography.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class HomePage extends ConsumerStatefulWidget {
-  const HomePage({super.key});
+class HomeSection extends ConsumerStatefulWidget {
+  const HomeSection({super.key});
 
   @override
-  ConsumerState<HomePage> createState() => _HomePageState();
+  ConsumerState<HomeSection> createState() => _HomePageState();
 }
 
-class _HomePageState extends ConsumerState<HomePage> {
+class _HomePageState extends ConsumerState<HomeSection> {
   // String? _mapStyleString;
   //
   // final Completer<GoogleMapController> _controller =

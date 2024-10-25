@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class SettingsPage extends ConsumerWidget {
-  const SettingsPage({super.key});
+class SettingsSection extends ConsumerWidget {
+  const SettingsSection({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

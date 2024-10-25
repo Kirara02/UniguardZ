@@ -13,8 +13,12 @@ _$BranchImpl _$$BranchImplFromJson(Map<String, dynamic> json) => _$BranchImpl(
           .map((e) => UFormField.fromJson(e as Map<String, dynamic>))
           .toList(),
       checkPointId: (json['checkPointId'] as num?)?.toInt(),
-      createdAt: json['createdAt'] as String?,
-      updatedAt: json['updatedAt'] as String?,
+      createdAt: json['createdAt'] == null
+          ? null
+          : DateTime.parse(json['createdAt'] as String),
+      updatedAt: json['updatedAt'] == null
+          ? null
+          : DateTime.parse(json['updatedAt'] as String),
       roleId: (json['roleId'] as num?)?.toInt(),
       parentBranchId: (json['parentBranchId'] as num?)?.toInt(),
     );
@@ -25,8 +29,8 @@ Map<String, dynamic> _$$BranchImplToJson(_$BranchImpl instance) =>
       'name': instance.name,
       'FormFields': instance.formFields,
       'checkPointId': instance.checkPointId,
-      'createdAt': instance.createdAt,
-      'updatedAt': instance.updatedAt,
+      'createdAt': instance.createdAt?.toIso8601String(),
+      'updatedAt': instance.updatedAt?.toIso8601String(),
       'roleId': instance.roleId,
       'parentBranchId': instance.parentBranchId,
     };

@@ -25,8 +25,8 @@ mixin _$Branch {
   @JsonKey(name: "FormFields")
   List<UFormField> get formFields => throw _privateConstructorUsedError;
   int? get checkPointId => throw _privateConstructorUsedError;
-  String? get createdAt => throw _privateConstructorUsedError;
-  String? get updatedAt => throw _privateConstructorUsedError;
+  DateTime? get createdAt => throw _privateConstructorUsedError;
+  DateTime? get updatedAt => throw _privateConstructorUsedError;
   int? get roleId => throw _privateConstructorUsedError;
   int? get parentBranchId => throw _privateConstructorUsedError;
 
@@ -45,8 +45,8 @@ abstract class $BranchCopyWith<$Res> {
       String name,
       @JsonKey(name: "FormFields") List<UFormField> formFields,
       int? checkPointId,
-      String? createdAt,
-      String? updatedAt,
+      DateTime? createdAt,
+      DateTime? updatedAt,
       int? roleId,
       int? parentBranchId});
 }
@@ -93,11 +93,11 @@ class _$BranchCopyWithImpl<$Res, $Val extends Branch>
       createdAt: freezed == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as DateTime?,
       updatedAt: freezed == updatedAt
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as DateTime?,
       roleId: freezed == roleId
           ? _value.roleId
           : roleId // ignore: cast_nullable_to_non_nullable
@@ -122,8 +122,8 @@ abstract class _$$BranchImplCopyWith<$Res> implements $BranchCopyWith<$Res> {
       String name,
       @JsonKey(name: "FormFields") List<UFormField> formFields,
       int? checkPointId,
-      String? createdAt,
-      String? updatedAt,
+      DateTime? createdAt,
+      DateTime? updatedAt,
       int? roleId,
       int? parentBranchId});
 }
@@ -168,11 +168,11 @@ class __$$BranchImplCopyWithImpl<$Res>
       createdAt: freezed == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as DateTime?,
       updatedAt: freezed == updatedAt
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as DateTime?,
       roleId: freezed == roleId
           ? _value.roleId
           : roleId // ignore: cast_nullable_to_non_nullable
@@ -218,9 +218,9 @@ class _$BranchImpl implements _Branch {
   @override
   final int? checkPointId;
   @override
-  final String? createdAt;
+  final DateTime? createdAt;
   @override
-  final String? updatedAt;
+  final DateTime? updatedAt;
   @override
   final int? roleId;
   @override
@@ -284,8 +284,8 @@ abstract class _Branch implements Branch {
       required final String name,
       @JsonKey(name: "FormFields") required final List<UFormField> formFields,
       final int? checkPointId,
-      final String? createdAt,
-      final String? updatedAt,
+      final DateTime? createdAt,
+      final DateTime? updatedAt,
       final int? roleId,
       final int? parentBranchId}) = _$BranchImpl;
 
@@ -301,9 +301,9 @@ abstract class _Branch implements Branch {
   @override
   int? get checkPointId;
   @override
-  String? get createdAt;
+  DateTime? get createdAt;
   @override
-  String? get updatedAt;
+  DateTime? get updatedAt;
   @override
   int? get roleId;
   @override
