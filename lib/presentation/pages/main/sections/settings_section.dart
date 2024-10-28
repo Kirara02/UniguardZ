@@ -12,12 +12,12 @@ class SettingsSection extends ConsumerWidget {
     return ListView(
       children: [
         ListTile(
-          title: const Text("Edit Profile"),
+          title: const Text("My Profile"),
           leading: Icon(
             Icons.person_rounded,
             color: AppColors.grey,
           ),
-          onTap: () => ref.read(routerProvider).push(Routes.EDIT_PROFILE),
+          onTap: () => ref.read(routerProvider).push(Routes.PROFILE),
         ),
         ListTile(
           title: const Text("Change Password"),

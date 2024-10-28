@@ -1,7 +1,16 @@
+import 'dart:developer';
+
+import 'package:background_location/background_location.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:uniguard_z/presentation/misc/app_routes.dart';
+import 'package:uniguard_z/presentation/misc/colors.dart';
 import 'package:uniguard_z/presentation/misc/typography.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:uniguard_z/presentation/misc/utils.dart';
+import 'package:uniguard_z/presentation/providers/routes/router_provider.dart';
+import 'package:uniguard_z/presentation/providers/user_data/user_data_provider.dart';
 
 class HomeSection extends ConsumerStatefulWidget {
   const HomeSection({super.key});
@@ -11,86 +20,76 @@ class HomeSection extends ConsumerStatefulWidget {
 }
 
 class _HomePageState extends ConsumerState<HomeSection> {
-  // String? _mapStyleString;
-  //
-  // final Completer<GoogleMapController> _controller =
-  //     Completer<GoogleMapController>();
-  //
-  // LatLng? _currentLatLng;
-  //
-  // Set<Marker> _markers = {};
-  // BitmapDescriptor? _customIcon;
-  //
-  // static const CameraPosition _initialCameraPosition = CameraPosition(
-  //   target: LatLng(37.42796133580664, -122.085749655962),
-  //   zoom: 15,
-  // );
-
-  @override
-  void initState() {
-    super.initState();
-
-    // Load map style
-    // rootBundle.loadString('assets/map/map_style.json').then((string) {
-    //   setState(() {
-    //     _mapStyleString = string;
-    //   });
-    // });
-
-    // _loadCustomMarkerIcon();
-    // getBackgroundLocation();
-  }
-
-  // void getBackgroundLocation() {
-  //   BackgroundLocation.getLocationUpdates((location) {
-  //     printIfDebug(location.toMap());
-  //     LatLng newLocation = LatLng(location.latitude!, location.longitude!);
-  //
-  //     setState(() {
-  //       _currentLatLng = newLocation;
-  //
-  //       _markers = {
-  //         Marker(
-  //           icon: _customIcon ?? BitmapDescriptor.defaultMarker,
-  //           markerId: const MarkerId("currentLocation"),
-  //           position: newLocation,
-  //           infoWindow: const InfoWindow(title: "Current Location"),
-  //         ),
-  //       };
-  //     });
-  //
-  //     // Pindahkan kamera ke lokasi terbaru
-  //     _moveCameraToLocation(newLocation);
-  //   });
-  // }
-
-  // Fungsi untuk memuat ikon marker dari assets
-  // Future<void> _loadCustomMarkerIcon() async {
-  //   _customIcon = await BitmapDescriptor.asset(
-  //     const ImageConfiguration(size: Size(48, 48)),
-  //     'assets/images/location_red.png',
-  //   );
-  // }
-
-  // Fungsi untuk memindahkan kamera ke lokasi terbaru
-  // Future<void> _moveCameraToLocation(LatLng newLocation) async {
-  //   final GoogleMapController controller = await _controller.future;
-  //   controller.animateCamera(CameraUpdate.newLatLng(newLocation));
-  // }
-
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: SingleChildScrollView(
-        child: Column(
-          children: [
-            Text(
-              AppLocalizations.of(context)!.welcomeMessage,
-              style: Typogaphy.Medium.copyWith(fontSize: 16),
-            )
-          ],
+    return ListView(
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
+      children: [
+        Container(
+          decoration: BoxDecoration(
+            color: AppColors.dark,
+            borderRadius: BorderRadius.circular(12),
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.fromLTRB(12, 16, 12, 8),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      AppLocalizations.of(context)!.welcomeMessage,
+                      style: Typogaphy.Regular.copyWith(fontSize: 16),
+                    ),
+                    const SizedBox(height: 4),
+                    Text(
+                      ref.watch(userDataProvider).valueOrNull?.name ?? "-",
+                      style: Typogaphy.Medium,
+                    )
+                  ],
+                ),
+              ),
+              const Divider(),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(12, 8, 12, 12),
+                child: InkWell(
+                  onTap: () async {
+                    LatLng? _latLng;
+
+                    if (await BackgroundLocation.isServiceRunning()) {
+                      BackgroundLocation.getLocationUpdates((value) {
+                        printIfDebug("position: $value");
+                        setState(() {
+                          _latLng = LatLng(value.latitude!, value.longitude!);
+                        });
+                      });
+                      printIfDebug("latlng: $_latLng");
+                    }
+                    ref.read(routerProvider).push(Routes.MAPS, extra: _latLng);
+                  },
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        "View current position",
+                        style: Typogaphy.Medium.copyWith(
+                          color: AppColors.secondaryExtraSoft,
+                          fontStyle: FontStyle.italic,
+                        ),
+                      ),
+                      Icon(
+                        Icons.arrow_forward,
+                        color: AppColors.secondaryExtraSoft,
+                      )
+                    ],
+                  ),
+                ),
+              )
+            ],
+          ),
         ),
-      ),
+      ],
     );
   }
 

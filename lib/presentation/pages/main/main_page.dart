@@ -4,6 +4,7 @@ import 'package:background_location/background_location.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:nfc_manager/nfc_manager.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:uniguard_z/presentation/enums/drawer_page.dart';
 import 'package:uniguard_z/presentation/extensions/build_context_extension.dart';
 import 'package:uniguard_z/presentation/misc/app_routes.dart';
@@ -45,7 +46,25 @@ class _MainPageState extends ConsumerState<MainPage> {
   void initState() {
     super.initState();
     _initPackageInfo();
-    startBackgroundService();
+    _checkPermissionsAndStartService();
+  }
+
+  void _checkPermissionsAndStartService() async {
+    if (await Permission.locationAlways.request().isGranted) {
+      startBackgroundService();
+    } else {
+      print("Location permission denied");
+    }
+  }
+
+  void startBackgroundService() async {
+    log("start location service");
+    await BackgroundLocation.setAndroidNotification(
+      title: "Background location is running",
+      message: "Background location in progress",
+      icon: "@mipmap/ic_launcher",
+    );
+    await BackgroundLocation.startLocationService();
   }
 
   Future<void> _initPackageInfo() async {
@@ -53,16 +72,6 @@ class _MainPageState extends ConsumerState<MainPage> {
     setState(() {
       _packageInfo = info;
     });
-  }
-
-  void startBackgroundService() async {
-    log("start location service");
-    await BackgroundLocation.setAndroidNotification(
-        title: "Background location is running",
-        message: "Background location in progress",
-        icon: "@mipmap/ic_launcher");
-    // BackgroundLocation.stopLocationService();
-    await BackgroundLocation.startLocationService(distanceFilter: 10);
   }
 
   @override

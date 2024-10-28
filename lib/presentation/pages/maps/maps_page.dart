@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:background_location/background_location.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -34,6 +33,7 @@ class _MapsPageState extends ConsumerState<MapsPage> {
   void initState() {
     super.initState();
 
+    // Load map style
     rootBundle.loadString('assets/map/map_style.json').then((string) {
       setState(() {
         _mapStyleString = string;
@@ -41,36 +41,48 @@ class _MapsPageState extends ConsumerState<MapsPage> {
     });
 
     _loadCustomMarkerIcon();
-    getBackgroundLocation();
+
+    if (widget.coordinate != null) {
+      _setMarkerAndMoveCamera(widget.coordinate!);
+    } else {
+      getBackgroundLocation();
+    }
   }
 
   void getBackgroundLocation() {
     BackgroundLocation.getLocationUpdates((location) {
-      // printIfDebug(location.toMap());
       LatLng newLocation = LatLng(location.latitude!, location.longitude!);
 
-      setState(() {
-        _currentLatLng = newLocation;
-
-        _markers = {
-          Marker(
-            icon: _customIcon ?? BitmapDescriptor.defaultMarker,
-            markerId: const MarkerId("currentLocation"),
-            position: newLocation,
-            infoWindow: const InfoWindow(title: "Current Location"),
-          ),
-        };
-      });
-
-      _moveCameraToLocation(newLocation);
+      if (widget.coordinate == null) {
+        setState(() {
+          _currentLatLng = newLocation;
+        });
+        _setMarkerAndMoveCamera(newLocation);
+      }
     });
   }
 
   Future<void> _loadCustomMarkerIcon() async {
     _customIcon = await BitmapDescriptor.asset(
-      const ImageConfiguration(size: Size(48, 48)),
-      'assets/images/location_red.png',
+      const ImageConfiguration(size: Size(48, 48)), // Ukuran ikon
+      'assets/images/location_red.png', // Lokasi aset
     );
+  }
+
+  void _setMarkerAndMoveCamera(LatLng position) {
+    printIfDebug("position: ${position}");
+    setState(() {
+      _currentLatLng = position;
+      _markers = {
+        Marker(
+          icon: _customIcon ?? BitmapDescriptor.defaultMarker,
+          markerId: const MarkerId("currentLocation"),
+          position: position,
+          infoWindow: const InfoWindow(title: "Current Location"),
+        ),
+      };
+    });
+    _moveCameraToLocation(position);
   }
 
   Future<void> _moveCameraToLocation(LatLng newLocation) async {
@@ -80,6 +92,7 @@ class _MapsPageState extends ConsumerState<MapsPage> {
 
   @override
   Widget build(BuildContext context) {
+    printIfDebug("coordinate: ${widget.coordinate}");
     return Scaffold(
       appBar: AppBar(
         title: const Text("View Location"),
@@ -91,6 +104,9 @@ class _MapsPageState extends ConsumerState<MapsPage> {
           initialCameraPosition: _initialCameraPosition,
           onMapCreated: (controller) {
             _controller.complete(controller);
+            if (_currentLatLng != null) {
+              _moveCameraToLocation(_currentLatLng!);
+            }
           },
           markers: _markers,
         ),

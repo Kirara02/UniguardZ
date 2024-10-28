@@ -1,4 +1,5 @@
 import 'package:go_router/go_router.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:uniguard_z/domain/entities/activity.dart';
 import 'package:uniguard_z/domain/entities/branch.dart';
@@ -6,7 +7,7 @@ import 'package:uniguard_z/domain/entities/task.dart';
 import 'package:uniguard_z/presentation/misc/app_routes.dart';
 import 'package:uniguard_z/presentation/pages/activity/activity_page.dart';
 import 'package:uniguard_z/presentation/pages/change_password/change_password_page.dart';
-import 'package:uniguard_z/presentation/pages/edit_profile/edit_profile_page.dart';
+import 'package:uniguard_z/presentation/pages/profile/profile_page.dart';
 import 'package:uniguard_z/presentation/pages/form/form_page.dart';
 import 'package:uniguard_z/presentation/pages/login/login_page.dart';
 import 'package:uniguard_z/presentation/pages/main/main_page.dart';
@@ -65,14 +66,14 @@ Raw<GoRouter> router(RouterRef ref) => GoRouter(
           path: Routes.MAPS,
           name: "maps",
           builder: (context, state) {
-            return const MapsPage();
+            return MapsPage(coordinate: state.extra as LatLng?);
           },
         ),
         GoRoute(
-          path: Routes.EDIT_PROFILE,
+          path: Routes.PROFILE,
           name: "edit-profile",
           builder: (context, state) {
-            return const EditProfilePage();
+            return const ProfilePage();
           },
         ),
         GoRoute(

@@ -7,7 +7,7 @@ abstract class Routes {
   static const TASK = _Paths.TASK;
   static const ACTIVITY = _Paths.ACTIVITY;
   static const MAPS = _Paths.MAPS;
-  static const EDIT_PROFILE = _Paths.EDIT_PROFILE;
+  static const PROFILE = _Paths.PROFILE;
   static const CHANGE_PASSWORD = _Paths.CHANGE_PASSWORD;
 }
 
@@ -21,6 +21,6 @@ abstract class _Paths {
   static const TASK = '/task';
   static const ACTIVITY = '/activity';
   static const MAPS = '/maps';
-  static const EDIT_PROFILE = '/edit-profile';
+  static const PROFILE = '/profile';
   static const CHANGE_PASSWORD = '/change-password';
 }
