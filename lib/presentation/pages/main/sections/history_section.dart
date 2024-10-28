@@ -27,7 +27,6 @@ class _HistorySectionState extends ConsumerState<HistorySection> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        // Tombol untuk switch page
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -49,8 +48,6 @@ class _HistorySectionState extends ConsumerState<HistorySection> {
           ],
         ),
         const SizedBox(height: 16),
-
-        // PageView untuk Uploaded dan Pending
         Expanded(
           child: PageView(
             controller: _pageController,

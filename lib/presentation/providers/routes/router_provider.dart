@@ -8,6 +8,7 @@ import 'package:uniguard_z/presentation/pages/activity/activity_page.dart';
 import 'package:uniguard_z/presentation/pages/form/form_page.dart';
 import 'package:uniguard_z/presentation/pages/login/login_page.dart';
 import 'package:uniguard_z/presentation/pages/main/main_page.dart';
+import 'package:uniguard_z/presentation/pages/maps/maps_page.dart';
 import 'package:uniguard_z/presentation/pages/splash/splash_page.dart';
 import 'package:uniguard_z/presentation/pages/task/task_page.dart';
 
@@ -56,6 +57,13 @@ Raw<GoRouter> router(RouterRef ref) => GoRouter(
           name: "activity",
           builder: (context, state) {
             return ActivityPage(activity: state.extra as Activity);
+          },
+        ),
+        GoRoute(
+          path: Routes.MAPS,
+          name: "maps",
+          builder: (context, state) {
+            return const MapsPage();
           },
         )
       ],

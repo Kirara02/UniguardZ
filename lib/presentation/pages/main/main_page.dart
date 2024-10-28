@@ -10,6 +10,8 @@ import 'package:uniguard_z/presentation/misc/app_routes.dart';
 import 'package:uniguard_z/presentation/misc/colors.dart';
 import 'package:uniguard_z/presentation/misc/typography.dart';
 import 'package:uniguard_z/presentation/misc/utils.dart';
+import 'package:uniguard_z/presentation/pages/history/history_pending_page.dart';
+import 'package:uniguard_z/presentation/pages/history/history_uploaded_page.dart';
 import 'package:uniguard_z/presentation/pages/main/sections/activities_section.dart';
 import 'package:uniguard_z/presentation/pages/main/sections/forms_section.dart';
 import 'package:uniguard_z/presentation/pages/main/sections/history_section.dart';
@@ -114,8 +116,8 @@ class _MainPageState extends ConsumerState<MainPage> {
         body: selectedPage == DrawerPage.history
             ? const TabBarView(
                 children: [
-                  Center(child: Text("Content for Uploaded")),
-                  Center(child: Text("Content for Pending")),
+                  HistoryUploadedPage(),
+                  HistoryPendingPage(),
                 ],
               )
             : _buildContent(selectedPage),

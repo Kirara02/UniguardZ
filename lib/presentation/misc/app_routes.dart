@@ -6,6 +6,7 @@ abstract class Routes {
   static const FORM = _Paths.FORM;
   static const TASK = _Paths.TASK;
   static const ACTIVITY = _Paths.ACTIVITY;
+  static const MAPS = _Paths.MAPS;
 }
 
 abstract class _Paths {
@@ -17,4 +18,5 @@ abstract class _Paths {
   static const FORM = '/form';
   static const TASK = '/task';
   static const ACTIVITY = '/activity';
+  static const MAPS = '/maps';
 }
