@@ -94,7 +94,7 @@ class _HistoryPendingPageState extends ConsumerState<HistoryPendingPage> {
                     ),
                     child: Text(
                       item['count'].toString(),
-                      style: Typogaphy.Regular.copyWith(color: Colors.white),
+                      style: Typogaphy.Regular.copyWith(color: Colors.white, fontSize: 12),
                     ),
                   ),
                 ),

@@ -5,6 +5,8 @@ import 'package:uniguard_z/domain/entities/branch.dart';
 import 'package:uniguard_z/domain/entities/task.dart';
 import 'package:uniguard_z/presentation/misc/app_routes.dart';
 import 'package:uniguard_z/presentation/pages/activity/activity_page.dart';
+import 'package:uniguard_z/presentation/pages/change_password/change_password_page.dart';
+import 'package:uniguard_z/presentation/pages/edit_profile/edit_profile_page.dart';
 import 'package:uniguard_z/presentation/pages/form/form_page.dart';
 import 'package:uniguard_z/presentation/pages/login/login_page.dart';
 import 'package:uniguard_z/presentation/pages/main/main_page.dart';
@@ -64,6 +66,20 @@ Raw<GoRouter> router(RouterRef ref) => GoRouter(
           name: "maps",
           builder: (context, state) {
             return const MapsPage();
+          },
+        ),
+        GoRoute(
+          path: Routes.EDIT_PROFILE,
+          name: "edit-profile",
+          builder: (context, state) {
+            return const EditProfilePage();
+          },
+        ),
+        GoRoute(
+          path: Routes.CHANGE_PASSWORD,
+          name: "change-password",
+          builder: (context, state) {
+            return const ChangePasswordPage();
           },
         )
       ],

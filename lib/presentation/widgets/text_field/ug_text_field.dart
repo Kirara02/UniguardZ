@@ -62,7 +62,7 @@ class _UGTextFieldState extends State<UGTextField> {
         controller: widget.controller,
         obscureText: _obscureText,
         readOnly: widget.readOnly,
-        style: Typogaphy.Regular,
+        style: Typogaphy.Regular.copyWith(color: AppColors.light),
         keyboardType: widget.keyboardType,
         textInputAction: widget.textInputAction ?? TextInputAction.done,
         maxLines: 1,
@@ -71,7 +71,7 @@ class _UGTextFieldState extends State<UGTextField> {
         decoration: InputDecoration(
           labelText: widget.label,
           labelStyle: Typogaphy.Regular.copyWith(
-            color: AppColors.secondarySoft,
+            color: AppColors.light,
             fontSize: 14,
           ),
           floatingLabelBehavior: FloatingLabelBehavior.always,
@@ -79,7 +79,7 @@ class _UGTextFieldState extends State<UGTextField> {
           hintText: widget.hintText,
           hintStyle: Typogaphy.Medium.copyWith(
             fontSize: 14,
-            color: AppColors.secondarySoft,
+            color: AppColors.grey,
           ),
           suffixIcon: widget.obscureText
               ? IconButton(
