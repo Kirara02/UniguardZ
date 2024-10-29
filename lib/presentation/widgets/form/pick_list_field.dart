@@ -45,10 +45,28 @@ class PickListField<T> extends StatelessWidget {
           Container(
             decoration: BoxDecoration(color: AppColors.dark),
             child: DropdownSearch<T>(
-              popupProps: const PopupProps.menu(
+              popupProps: PopupProps.menu(
+                menuProps: MenuProps(
+                  backgroundColor: AppColors.primarySoft,
+                ),
                 showSearchBox: false,
                 showSelectedItems: true,
                 fit: FlexFit.loose,
+                itemBuilder: (context, item, isSelected) {
+                  return Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                    decoration: BoxDecoration(
+                      border: Border(
+                        bottom: BorderSide(color: AppColors.primaryExtraSoft, width: 1),
+                      ),
+                    ),
+                    child: Text(
+                      itemAsString?.call(item) ?? item.toString(),
+                      style: Typogaphy.Regular.copyWith(
+                          fontSize: 14, color: isSelected ? AppColors.secondary : Colors.white),
+                    ),
+                  );
+                },
               ),
               items: items,
               itemAsString: itemAsString ?? (item) => item.toString(),
@@ -58,7 +76,6 @@ class PickListField<T> extends StatelessWidget {
               dropdownDecoratorProps: DropDownDecoratorProps(
                 dropdownSearchDecoration: InputDecoration(
                   contentPadding: const EdgeInsets.symmetric(horizontal: 8, vertical: 14),
-                  fillColor: AppColors.dark,
                   hintText: hintText,
                   hintStyle: Typogaphy.Regular.copyWith(fontSize: 14),
                   border: InputBorder.none,

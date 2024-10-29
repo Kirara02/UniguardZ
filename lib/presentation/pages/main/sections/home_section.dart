@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:background_location/background_location.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -8,7 +6,6 @@ import 'package:uniguard_z/presentation/misc/app_routes.dart';
 import 'package:uniguard_z/presentation/misc/colors.dart';
 import 'package:uniguard_z/presentation/misc/typography.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:uniguard_z/presentation/misc/utils.dart';
 import 'package:uniguard_z/presentation/providers/routes/router_provider.dart';
 import 'package:uniguard_z/presentation/providers/user_data/user_data_provider.dart';
 
@@ -20,6 +17,34 @@ class HomeSection extends ConsumerStatefulWidget {
 }
 
 class _HomePageState extends ConsumerState<HomeSection> {
+  LatLng? _currentLatLng;
+
+  @override
+  void initState() {
+    super.initState();
+    _getCurrentLatLng();
+  }
+
+  Future<void> _getCurrentLatLng() async {
+    bool serviceRunning = await BackgroundLocation.isServiceRunning();
+
+    if (!serviceRunning) {
+      await BackgroundLocation.setAndroidNotification(
+        title: "Location Service",
+        message: "Fetching location in the background",
+        icon: "@mipmap/ic_launcher",
+      );
+      await BackgroundLocation.startLocationService();
+    }
+
+    BackgroundLocation.getLocationUpdates((location) {
+      LatLng latLng = LatLng(location.latitude!, location.longitude!);
+      setState(() {
+        _currentLatLng = latLng;
+      });
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return ListView(
@@ -46,7 +71,7 @@ class _HomePageState extends ConsumerState<HomeSection> {
                     Text(
                       ref.watch(userDataProvider).valueOrNull?.name ?? "-",
                       style: Typogaphy.Medium,
-                    )
+                    ),
                   ],
                 ),
               ),
@@ -54,19 +79,9 @@ class _HomePageState extends ConsumerState<HomeSection> {
               Padding(
                 padding: const EdgeInsets.fromLTRB(12, 8, 12, 12),
                 child: InkWell(
-                  onTap: () async {
-                    LatLng? _latLng;
-
-                    if (await BackgroundLocation.isServiceRunning()) {
-                      BackgroundLocation.getLocationUpdates((value) {
-                        printIfDebug("position: $value");
-                        setState(() {
-                          _latLng = LatLng(value.latitude!, value.longitude!);
-                        });
-                      });
-                      printIfDebug("latlng: $_latLng");
-                    }
-                    ref.read(routerProvider).push(Routes.MAPS, extra: _latLng);
+                  onTap: () {
+                    _getCurrentLatLng();
+                    ref.read(routerProvider).push(Routes.MAPS, extra: _currentLatLng);
                   },
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
