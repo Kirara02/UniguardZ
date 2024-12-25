@@ -1,6 +1,17 @@
 {
   "helloWorld": "Halo Dunia",
-  "welcomeMessage": "Selamat datang di Uniguard Z",
+  "welcome": "Selamat datang,",
   "email" : "E-mail",
-  "password" : "Kata Sandi"
+  "password" : "Kata Sandi",
+  "home" : "Beranda",
+  "history" : "Riwayat",
+  "language" : "Bahasa",
+  "change_profile" : "Ubah Profil",
+  "change_password" : "Ubah Kata Sandi",
+  "login" : "Masuk",
+  "logout" : "Keluar",
+  "general" : "Umum",
+  "account" : "Akun",
+  "settings" : "Pengaturan",
+  "choose_language" : "Pilih Bahasa"
 }

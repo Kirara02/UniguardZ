@@ -1,6 +1,17 @@
 {
   "helloWorld": "Hello World",
-  "welcomeMessage": "Welcome to Uniguard Z",
+  "welcome": "Welcome,",
   "email" : "Email",
-  "password" : "Passeord"
+  "password" : "Password",
+  "home" : "Home",
+  "history" : "History",
+  "language" : "Language",
+  "change_profile" : "Change Profile",
+  "change_password" : "Change Password",
+  "login" : "Login",
+  "logout" : "Logout",
+  "general" : "General",
+  "account" : "Account",
+  "settings" : "Settings",
+  "choose_language" : "Choose Language"
 }

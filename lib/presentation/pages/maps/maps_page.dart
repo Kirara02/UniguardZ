@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'package:background_location/background_location.dart';
+// import 'package:background_location/background_location.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -50,16 +50,16 @@ class _MapsPageState extends ConsumerState<MapsPage> {
   }
 
   void getBackgroundLocation() {
-    BackgroundLocation.getLocationUpdates((location) {
-      LatLng newLocation = LatLng(location.latitude!, location.longitude!);
+    // BackgroundLocation.getLocationUpdates((location) {
+    //   LatLng newLocation = LatLng(location.latitude!, location.longitude!);
 
-      if (widget.coordinate == null) {
-        setState(() {
-          _currentLatLng = newLocation;
-        });
-        _setMarkerAndMoveCamera(newLocation);
-      }
-    });
+    //   if (widget.coordinate == null) {
+    //     setState(() {
+    //       _currentLatLng = newLocation;
+    //     });
+    //     _setMarkerAndMoveCamera(newLocation);
+    //   }
+    // });
   }
 
   Future<void> _loadCustomMarkerIcon() async {

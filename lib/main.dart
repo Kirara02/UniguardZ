@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:uniguard_z/presentation/misc/colors.dart';
-import 'package:uniguard_z/presentation/misc/typography.dart';
+import 'package:uniguard_z/presentation/misc/theme.dart';
 import 'package:uniguard_z/presentation/providers/common/locale_provider.dart';
+import 'package:uniguard_z/presentation/providers/common/theme_provider.dart';
 import 'package:uniguard_z/presentation/providers/routes/router_provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -17,6 +17,8 @@ class MainApp extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final themeNotifier = ref.watch(appThemeProvider);
+
     return MaterialApp.router(
       title: "UniGuardZ",
       debugShowCheckedModeBanner: false,
@@ -28,27 +30,12 @@ class MainApp extends ConsumerWidget {
       ],
       locale: ref.watch(localeProvider),
       supportedLocales: AppLocalizations.supportedLocales,
-      theme: ThemeData(
-        fontFamily: "Poppins",
-        brightness: Brightness.dark,
-        useMaterial3: true,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-        scaffoldBackgroundColor: AppColors.primary,
-        appBarTheme: AppBarTheme(
-          backgroundColor: AppColors.primarySoft,
-          titleTextStyle: Typogaphy.Regular.copyWith(fontSize: 16),
-        ),
-        elevatedButtonTheme: ElevatedButtonThemeData(
-          style: ElevatedButton.styleFrom(
-            backgroundColor: AppColors.secondary,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(8),
-            ),
-          ),
-        ),
-      ),
+      theme: AppTheme.lightTheme,
+      darkTheme: AppTheme.darkTheme,
+      themeMode: themeNotifier.isDarkMode ? ThemeMode.dark : ThemeMode.light,
       routeInformationParser: ref.watch(routerProvider).routeInformationParser,
-      routeInformationProvider: ref.watch(routerProvider).routeInformationProvider,
+      routeInformationProvider:
+          ref.watch(routerProvider).routeInformationProvider,
       routerDelegate: ref.watch(routerProvider).routerDelegate,
     );
   }

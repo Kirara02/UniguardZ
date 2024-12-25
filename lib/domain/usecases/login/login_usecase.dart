@@ -13,7 +13,8 @@ class Login implements UseCase<Result<User>, LoginParams> {
 
   @override
   Future<Result<User>> call(LoginParams params) async {
-    var results = await _authRepository.login(email: params.email, password: params.password);
+    var results = await _authRepository.login(
+        email: params.email, password: params.password);
 
     return switch (results) {
       Success(value: final result) => Result.success(result),

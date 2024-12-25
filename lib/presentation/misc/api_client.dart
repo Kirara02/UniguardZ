@@ -13,7 +13,7 @@ class ApiClient {
   }) {
     _dio = Dio(
       BaseOptions(
-        baseUrl: baseUrl ?? "${Constants.BASEURL}/api",
+        baseUrl: baseUrl ?? Constants.BASEURL,
         connectTimeout: const Duration(seconds: 10),
         receiveTimeout: const Duration(seconds: 10),
         responseType: ResponseType.json,

@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:uniguard_z/presentation/misc/screen.dart';
+import 'package:uniguard_z/presentation/misc/typography.dart';
+import 'package:uniguard_z/presentation/providers/routes/router_provider.dart';
 import 'package:uniguard_z/presentation/widgets/button/custom_button.dart';
+import 'package:uniguard_z/presentation/widgets/common/custom_view.dart';
 import 'package:uniguard_z/presentation/widgets/text_field/ug_text_field.dart';
 
 class ChangePasswordPage extends ConsumerStatefulWidget {
@@ -15,7 +20,8 @@ class _ChangePasswordPageState extends ConsumerState<ChangePasswordPage> {
 
   final TextEditingController _oldPasswordController = TextEditingController();
   final TextEditingController _newPasswordController = TextEditingController();
-  final TextEditingController _retypePasswordController = TextEditingController();
+  final TextEditingController _retypePasswordController =
+      TextEditingController();
 
   @override
   void dispose() {
@@ -45,90 +51,113 @@ class _ChangePasswordPageState extends ConsumerState<ChangePasswordPage> {
     // );
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Change Password"),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: SingleChildScrollView(
-          child: Form(
-            key: _formKey,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                UGTextField(
-                  label: 'Old Password',
-                  hintText: '******',
-                  controller: _oldPasswordController,
-                  keyboardType: TextInputType.visiblePassword,
-                  obscureText: true,
-                  textInputAction: TextInputAction.next,
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please enter old password';
-                    }
-                    return null;
-                  },
-                  onFieldSubmitted: (_) {
-                    FocusScope.of(context).nextFocus(); // Move to next field
-                  },
+      body: CustomView(
+        header: Container(
+          height: AppScreens.height * 0.1,
+          padding: const EdgeInsets.fromLTRB(16, 28, 16, 0),
+          child: Row(
+            children: [
+              IconButton(
+                onPressed: () => ref.read(routerProvider).pop(),
+                icon: const FaIcon(
+                  FontAwesomeIcons.arrowLeft,
+                  color: Colors.white,
+                  size: 20,
                 ),
-                const SizedBox(height: 20),
-                UGTextField(
-                  label: 'New Password',
-                  hintText: '******',
-                  controller: _newPasswordController,
-                  keyboardType: TextInputType.visiblePassword,
-                  obscureText: true,
-                  textInputAction: TextInputAction.next,
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please enter new password';
-                    }
-                    if (value.length < 8) {
-                      return 'Password must be at least 8 characters long';
-                    }
-                    return null;
-                  },
-                  onFieldSubmitted: (_) {
-                    FocusScope.of(context).nextFocus(); // Move to next field
-                  },
+              ),
+              const SizedBox(width: 8),
+              Text(
+                "Settings",
+                style: Typogaphy.Medium.copyWith(
+                  fontSize: 14,
+                  color: Colors.white,
                 ),
-                const SizedBox(height: 20),
-                UGTextField(
-                  label: 'Retype Password',
-                  hintText: '******',
-                  controller: _retypePasswordController,
-                  keyboardType: TextInputType.visiblePassword,
-                  obscureText: true,
-                  textInputAction: TextInputAction.done,
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please enter retype password';
-                    }
-                    if (value != _newPasswordController.text) {
-                      return 'Passwords do not match';
-                    }
-                    return null;
-                  },
-                  onFieldSubmitted: (_) {
-                    FocusScope.of(context).unfocus(); // Move to next field
-                  },
-                ),
-                const SizedBox(height: 20),
-                CustomButton(
-                  title: "Confirm",
-                  fullwidth: true,
-                  onPressed: () {
-                    if (_formKey.currentState!.validate()) {
-                      // ref.read(userChangePasswordProvider.notifier).changePassword(
-                      //     params: ChangePasswordParams(
-                      //         currentPassword: _oldPasswordController.text,
-                      //         newPassword: _newPasswordController.text));
-                    }
-                  },
-                )
-              ],
+              )
+            ],
+          ),
+        ),
+        body: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: SingleChildScrollView(
+            child: Form(
+              key: _formKey,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  UGTextField(
+                    label: 'Old Password',
+                    hintText: '******',
+                    controller: _oldPasswordController,
+                    keyboardType: TextInputType.visiblePassword,
+                    obscureText: true,
+                    textInputAction: TextInputAction.next,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please enter old password';
+                      }
+                      return null;
+                    },
+                    onFieldSubmitted: (_) {
+                      FocusScope.of(context).nextFocus(); // Move to next field
+                    },
+                  ),
+                  const SizedBox(height: 20),
+                  UGTextField(
+                    label: 'New Password',
+                    hintText: '******',
+                    controller: _newPasswordController,
+                    keyboardType: TextInputType.visiblePassword,
+                    obscureText: true,
+                    textInputAction: TextInputAction.next,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please enter new password';
+                      }
+                      if (value.length < 8) {
+                        return 'Password must be at least 8 characters long';
+                      }
+                      return null;
+                    },
+                    onFieldSubmitted: (_) {
+                      FocusScope.of(context).nextFocus(); // Move to next field
+                    },
+                  ),
+                  const SizedBox(height: 20),
+                  UGTextField(
+                    label: 'Retype Password',
+                    hintText: '******',
+                    controller: _retypePasswordController,
+                    keyboardType: TextInputType.visiblePassword,
+                    obscureText: true,
+                    textInputAction: TextInputAction.done,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please enter retype password';
+                      }
+                      if (value != _newPasswordController.text) {
+                        return 'Passwords do not match';
+                      }
+                      return null;
+                    },
+                    onFieldSubmitted: (_) {
+                      FocusScope.of(context).unfocus(); // Move to next field
+                    },
+                  ),
+                  const SizedBox(height: 20),
+                  CustomButton(
+                    title: "Confirm",
+                    fullwidth: true,
+                    onPressed: () {
+                      if (_formKey.currentState!.validate()) {
+                        // ref.read(userChangePasswordProvider.notifier).changePassword(
+                        //     params: ChangePasswordParams(
+                        //         currentPassword: _oldPasswordController.text,
+                        //         newPassword: _newPasswordController.text));
+                      }
+                    },
+                  )
+                ],
+              ),
             ),
           ),
         ),

@@ -4,10 +4,9 @@ import 'package:android_intent_plus/android_intent.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:disable_battery_optimization/disable_battery_optimization.dart';
+// import 'package:disable_battery_optimization/disable_battery_optimization.dart';
 import 'package:uniguard_z/presentation/extensions/build_context_extension.dart';
 import 'package:uniguard_z/presentation/misc/app_routes.dart';
-import 'package:uniguard_z/presentation/misc/colors.dart';
 import 'package:uniguard_z/presentation/misc/typography.dart';
 import 'package:uniguard_z/presentation/providers/routes/router_provider.dart';
 import 'package:uniguard_z/presentation/providers/user_data/user_data_provider.dart';
@@ -24,7 +23,8 @@ class LoginPage extends ConsumerStatefulWidget {
   ConsumerState<LoginPage> createState() => _LoginPageState();
 }
 
-class _LoginPageState extends ConsumerState<LoginPage> with WidgetsBindingObserver {
+class _LoginPageState extends ConsumerState<LoginPage>
+    with WidgetsBindingObserver {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
@@ -49,7 +49,7 @@ class _LoginPageState extends ConsumerState<LoginPage> with WidgetsBindingObserv
     super.dispose();
   }
 
-// Listen to app lifecycle changes
+  // Listen to app lifecycle changes
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
     super.didChangeAppLifecycleState(state);
@@ -82,7 +82,7 @@ class _LoginPageState extends ConsumerState<LoginPage> with WidgetsBindingObserv
 
 // Function to request permissions
   Future<void> _requestPermissions() async {
-    await _checkBatteryOptimization();
+    // await _checkBatteryOptimization();
     await _checkBluetoothPermission();
     await _checkLocationPermissions();
     if (Platform.isAndroid && (await _getAndroidVersion() >= 30)) {
@@ -90,28 +90,29 @@ class _LoginPageState extends ConsumerState<LoginPage> with WidgetsBindingObserv
     }
   }
 
-  Future<void> _checkBatteryOptimization() async {
-    await _showLoadingDialog(context, "Checking Battery Optimization...");
+  // Future<void> _checkBatteryOptimization() async {
+  //   await _showLoadingDialog(context, "Checking Battery Optimization...");
 
-    // Cek kondisi battery optimization
-    bool isBatteryOptimized = await _isBatteryOptimizationEnabled();
-    if (mounted) {
-      Navigator.of(context).pop();
-    }
-    _isLoadingDialogVisible = false;
+  //   // Cek kondisi battery optimization
+  //   bool isBatteryOptimized = await _isBatteryOptimizationEnabled();
+  //   if (mounted) {
+  //     Navigator.of(context).pop();
+  //   }
+  //   _isLoadingDialogVisible = false;
 
-    if (!isBatteryOptimized) {
-      await _showPermissionDialog(
-        message: "Battery optimizations: Battery optimization enabled. Location functions may be negatively impacted",
-        onFix: _requestDisableBatteryOptimization,
-      );
-    }
-  }
+  //   if (!isBatteryOptimized) {
+  //     await _showPermissionDialog(
+  //       message:
+  //           "Battery optimizations: Battery optimization enabled. Location functions may be negatively impacted",
+  //       onFix: _requestDisableBatteryOptimization,
+  //     );
+  //   }
+  // }
 
-  Future<bool> _isBatteryOptimizationEnabled() async {
-    final batteryOptimizationStatus = await DisableBatteryOptimization.isBatteryOptimizationDisabled;
-    return batteryOptimizationStatus ?? true;
-  }
+  // Future<bool> _isBatteryOptimizationEnabled() async {
+  //   final batteryOptimizationStatus = await DisableBatteryOptimization.isBatteryOptimizationDisabled;
+  //   return batteryOptimizationStatus ?? true;
+  // }
 
   Future<void> _checkBluetoothPermission() async {
     await _showLoadingDialog(context, "Checking Bluetooth Permission...");
@@ -125,7 +126,8 @@ class _LoginPageState extends ConsumerState<LoginPage> with WidgetsBindingObserv
 
     if (!isBluetoothEnabled) {
       await _showPermissionDialog(
-        message: "Bluetooth permission: Bluetooth beacon scanning requires permission.",
+        message:
+            "Bluetooth permission: Bluetooth beacon scanning requires permission.",
         onFix: _requestEnableBluetooth,
       );
     }
@@ -155,7 +157,8 @@ class _LoginPageState extends ConsumerState<LoginPage> with WidgetsBindingObserv
   }
 
   Future<void> _checkLocationAlwaysPermissions() async {
-    await _showLoadingDialog(context, "Checking Background Location Permissions...");
+    await _showLoadingDialog(
+        context, "Checking Background Location Permissions...");
 
     bool isLocationAlwaysGranted = await _isLocationAlwaysPermissionGranted();
     if (mounted) {
@@ -288,7 +291,7 @@ class _LoginPageState extends ConsumerState<LoginPage> with WidgetsBindingObserv
             ref.read(routerProvider).go(Routes.MAIN);
           }
         } else if (next is AsyncError) {
-          hideLoadingDialog(context);
+          // hideLoadingDialog(context);
           context.showSnackBar(next.error.toString());
         } else if (next.isLoading) {
           showLoadingDialog(context);
@@ -298,6 +301,7 @@ class _LoginPageState extends ConsumerState<LoginPage> with WidgetsBindingObserv
 
     return Scaffold(
       resizeToAvoidBottomInset: true,
+      backgroundColor: Theme.of(context).colorScheme.primary,
       body: Center(
         child: SingleChildScrollView(
           padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -307,9 +311,10 @@ class _LoginPageState extends ConsumerState<LoginPage> with WidgetsBindingObserv
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 28),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 20, vertical: 28),
                   decoration: BoxDecoration(
-                    color: AppColors.dark,
+                    color: Theme.of(context).colorScheme.surface,
                     borderRadius: BorderRadius.circular(12),
                   ),
                   child: Column(
@@ -317,23 +322,25 @@ class _LoginPageState extends ConsumerState<LoginPage> with WidgetsBindingObserv
                       Image.asset(
                         "assets/images/login_logo.png",
                         height: 58,
+                        color: Theme.of(context).colorScheme.onSurface,
                       ),
                       const SizedBox(height: 36),
                       UGTextField(
                         controller: _emailController,
                         label: AppLocalizations.of(context)!.email,
                         hintText: "user@mail.com",
-                        keyboardType: TextInputType.emailAddress,
+                        keyboardType: TextInputType.text,
                         textInputAction: TextInputAction.next,
                         validator: (value) {
                           if (value == null || value.isEmpty) {
                             return 'Please enter your email';
                           }
-                          const emailPattern = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$';
-                          final regExp = RegExp(emailPattern);
-                          if (!regExp.hasMatch(value)) {
-                            return 'Please enter a valid email address';
-                          }
+                          // const emailPattern =
+                          //     r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$';
+                          // final regExp = RegExp(emailPattern);
+                          // if (!regExp.hasMatch(value)) {
+                          //   return 'Please enter a valid email address';
+                          // }
                           return null;
                         },
                       ),
@@ -355,13 +362,13 @@ class _LoginPageState extends ConsumerState<LoginPage> with WidgetsBindingObserv
                       const SizedBox(height: 20),
                       CustomButton(
                         fullwidth: true,
-                        title: "Login",
+                        title: AppLocalizations.of(context)!.login,
                         onPressed: () async {
                           context.hideKeyboard();
                           if (_formKey.currentState!.validate()) {
-                            ref
-                                .read(userDataProvider.notifier)
-                                .login(email: _emailController.text, password: _passwordController.text);
+                            ref.read(userDataProvider.notifier).login(
+                                email: _emailController.text,
+                                password: _passwordController.text);
                           }
                         },
                       ),
