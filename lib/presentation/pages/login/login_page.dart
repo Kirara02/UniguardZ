@@ -8,6 +8,7 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:uniguard_z/presentation/extensions/build_context_extension.dart';
 import 'package:uniguard_z/presentation/misc/app_routes.dart';
 import 'package:uniguard_z/presentation/misc/typography.dart';
+import 'package:uniguard_z/presentation/misc/utils.dart';
 import 'package:uniguard_z/presentation/providers/routes/router_provider.dart';
 import 'package:uniguard_z/presentation/providers/user_data/user_data_provider.dart';
 import 'package:uniguard_z/presentation/widgets/button/custom_button.dart';
@@ -359,7 +360,25 @@ class _LoginPageState extends ConsumerState<LoginPage>
                           return null;
                         },
                       ),
-                      const SizedBox(height: 20),
+                      const SizedBox(height: 8),
+                      Align(
+                        alignment: Alignment.centerRight,
+                        child: GestureDetector(
+                          onTap: () => ref
+                              .read(routerProvider)
+                              .push(Routes.FORGOT_PASSWORD),
+                          child: Text(
+                            "${AppLocalizations.of(context)!.forgot_password}?",
+                            style: Theme.of(context)
+                                .textTheme
+                                .labelMedium!
+                                .copyWith(
+                                  fontWeight: FontWeight.w500,
+                                ),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 16),
                       CustomButton(
                         fullwidth: true,
                         title: AppLocalizations.of(context)!.login,

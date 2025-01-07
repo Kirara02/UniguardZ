@@ -17,7 +17,8 @@ class MapsPage extends ConsumerStatefulWidget {
 class _MapsPageState extends ConsumerState<MapsPage> {
   String? _mapStyleString;
 
-  final Completer<GoogleMapController> _controller = Completer<GoogleMapController>();
+  final Completer<GoogleMapController> _controller =
+      Completer<GoogleMapController>();
 
   LatLng? _currentLatLng;
 
@@ -70,7 +71,7 @@ class _MapsPageState extends ConsumerState<MapsPage> {
   }
 
   void _setMarkerAndMoveCamera(LatLng position) {
-    printIfDebug("position: ${position}");
+    printIfDebug("position: $position");
     setState(() {
       _currentLatLng = position;
       _markers = {

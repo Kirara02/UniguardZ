@@ -12,6 +12,7 @@ class AppTheme {
       secondary: AppColors.secondarySoft,
       tertiary: AppColors.secondaryExtraSoft,
       surface: AppColors.light,
+      surfaceBright: Colors.white,
     ),
     iconTheme: IconThemeData(color: AppColors.dark),
     textTheme: TextTheme(
@@ -53,7 +54,7 @@ class AppTheme {
       secondary: AppColors.primarySoft,
       tertiary: AppColors.primaryExtraSoft,
       surface: AppColors.dark,
-
+      surfaceBright: Colors.black,
     ),
     iconTheme: IconThemeData(color: AppColors.light),
     textTheme: TextTheme(

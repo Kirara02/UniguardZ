@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:uniguard_z/presentation/misc/app_routes.dart';
-import 'package:uniguard_z/presentation/misc/colors.dart';
 import 'package:uniguard_z/presentation/misc/screen.dart';
 import 'package:uniguard_z/presentation/misc/typography.dart';
 import 'package:uniguard_z/presentation/providers/routes/router_provider.dart';
@@ -78,13 +77,14 @@ class HomeSection extends ConsumerWidget {
                 ),
                 const SizedBox(height: 4),
                 SizedBox(
-                  width: 100, // Tetapkan lebar eksplisit
+                  width: 100,
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(8),
                     child: LinearProgressIndicator(
                       value: progress,
                       backgroundColor: Colors.white.withOpacity(0.3),
-                      valueColor: AlwaysStoppedAnimation<Color>(Colors.green),
+                      valueColor:
+                          const AlwaysStoppedAnimation<Color>(Colors.green),
                       minHeight: 6,
                     ),
                   ),
@@ -275,13 +275,16 @@ class HomeSection extends ConsumerWidget {
                     child: Container(
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(12),
-                        color: colorScheme.secondary,
+                        color: colorScheme.surfaceBright,
+                        // border: Border.all(
+                        //   color: colorScheme.outline.withOpacity(0.5),
+                        // ),
                         boxShadow: [
                           BoxShadow(
-                            color: colorScheme.primary.withOpacity(0.5),
-                            spreadRadius: 1,
-                            blurRadius: 1,
-                            offset: const Offset(1, 2),
+                            color: colorScheme.error.withOpacity(0.6),
+                            spreadRadius: 1.5,
+                            blurRadius: 2,
+                            offset: const Offset(1, 1),
                           ),
                         ],
                       ),
@@ -290,16 +293,17 @@ class HomeSection extends ConsumerWidget {
                         children: [
                           FaIcon(
                             item.icon,
-                            color: AppColors.light,
                             size: 42,
                           ),
-                          const SizedBox(height: 4),
+                          const SizedBox(height: 8),
                           Text(
                             item.label,
-                            style: Typogaphy.Medium.copyWith(
-                              fontSize: 12,
-                              color: AppColors.light,
-                            ),
+                            style: Theme.of(context)
+                                .textTheme
+                                .labelMedium!
+                                .copyWith(
+                                  fontWeight: FontWeight.w500,
+                                ),
                             textAlign: TextAlign.center,
                           ),
                         ],

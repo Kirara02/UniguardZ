@@ -9,7 +9,11 @@ class SwitchField extends StatelessWidget {
   final bool isRequired;
 
   const SwitchField(
-      {super.key, required this.label, required this.value, required this.onChanged, this.isRequired = false});
+      {super.key,
+      required this.label,
+      required this.value,
+      required this.onChanged,
+      this.isRequired = false});
 
   @override
   Widget build(BuildContext context) {
@@ -23,11 +27,23 @@ class SwitchField extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Row(
-            children: [
-              if (isRequired) const Text("* "),
-              Text(label, style: Typogaphy.Medium),
-            ],
+          Expanded(
+            child: Text.rich(
+              TextSpan(
+                children: [
+                  if (isRequired)
+                    const TextSpan(
+                      text: "* ",
+                      style: TextStyle(color: Colors.red),
+                    ),
+                  TextSpan(
+                    text: label,
+                    style: Typogaphy.Medium,
+                  ),
+                ],
+              ),
+              softWrap: true, // Allow text wrapping
+            ),
           ),
           Switch(
             value: value,

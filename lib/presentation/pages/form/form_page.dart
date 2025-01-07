@@ -110,9 +110,13 @@ class _FormPageState extends ConsumerState<FormPage> {
     return PickListField<int>(
       label: field.name,
       value: formValues[field.id],
-      items: field.formPickList?.first.formPickListOptions.map((option) => option.id).toList() ?? [],
-      itemAsString: (int? id) =>
-          field.formPickList!.first.formPickListOptions.firstWhere((option) => option.id == id).name,
+      items: field.formPickList?.first.formPickListOptions
+              .map((option) => option.id)
+              .toList() ??
+          [],
+      itemAsString: (int? id) => field.formPickList!.first.formPickListOptions
+          .firstWhere((option) => option.id == id)
+          .name,
       onChanged: (value) {
         setState(() {
           formValues[field.id] = value;
@@ -152,12 +156,22 @@ class _FormPageState extends ConsumerState<FormPage> {
 
   // Photo field (mockup as text)
   Widget _buildPhotoField(UFormField field) {
-    return PhotoField<String>(
+    // return PhotoField<String>(
+    //   label: field.name,
+    //   value: formValues[field.id],
+    //   isRequired: field.isRequire,
+    //   onTap: () {
+    //     _showImageSourceDialog(field);
+    //   },
+    // );
+    return PhotoField2(
       label: field.name,
       value: formValues[field.id],
       isRequired: field.isRequire,
-      onTap: () {
-        _showImageSourceDialog(field);
+      onImagePicked: (imagePath) {
+        setState(() {
+          formValues[field.id] = imagePath;
+        });
       },
     );
   }
@@ -184,7 +198,8 @@ class _FormPageState extends ConsumerState<FormPage> {
 
     if (pickedFile != null) {
       setState(() {
-        formValues[field.id] = pickedFile.path; // Simpan path dari foto yang dipilih
+        formValues[field.id] =
+            pickedFile.path; // Simpan path dari foto yang dipilih
       });
     }
   }
@@ -194,7 +209,9 @@ class _FormPageState extends ConsumerState<FormPage> {
     if (_key.currentState?.validate() ?? false) {
       // Validasi tambahan untuk foto
       for (var field in widget.branch.formFields) {
-        if (field.fieldTypeId == 4 && field.isRequire && formValues[field.id] == null) {
+        if (field.fieldTypeId == 4 &&
+            field.isRequire &&
+            formValues[field.id] == null) {
           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
             content: Text('Field ${field.name} is required'),
           ));
@@ -204,7 +221,9 @@ class _FormPageState extends ConsumerState<FormPage> {
 
       // Validasi untuk signature
       for (var field in widget.branch.formFields) {
-        if (field.fieldTypeId == 5 && field.isRequire && formValues[field.id] == null) {
+        if (field.fieldTypeId == 5 &&
+            field.isRequire &&
+            formValues[field.id] == null) {
           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
             content: Text('Field ${field.name} is required'),
           ));
@@ -240,7 +259,8 @@ class _FormPageState extends ConsumerState<FormPage> {
   }
 
   // Method to show signature dialog
-  void _showSignatureDialog(UFormField field, SignatureController signatureController) {
+  void _showSignatureDialog(
+      UFormField field, SignatureController signatureController) {
     showGeneralDialog(
       context: context,
       barrierDismissible: true,
@@ -250,7 +270,8 @@ class _FormPageState extends ConsumerState<FormPage> {
       },
       transitionDuration: const Duration(milliseconds: 300),
       transitionBuilder: (context, animation1, animation2, child) {
-        final curvedAnimation = CurvedAnimation(parent: animation1, curve: Curves.easeInOut);
+        final curvedAnimation =
+            CurvedAnimation(parent: animation1, curve: Curves.easeInOut);
 
         return ScaleTransition(
           scale: curvedAnimation,

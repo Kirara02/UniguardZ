@@ -65,7 +65,8 @@ class SignatureDialog<T> extends StatelessWidget {
                   child: ElevatedButton(
                     onPressed: () async {
                       if (signatureController.isNotEmpty) {
-                        final signature = await signatureController.toPngBytes();
+                        final signature =
+                            await signatureController.toPngBytes();
                         onSave(signature as T?);
                         isSignatureSaved = true;
                         if (context.mounted) {

@@ -9,6 +9,7 @@ import 'package:uniguard_z/presentation/misc/app_routes.dart';
 import 'package:uniguard_z/presentation/pages/activity/activity_page.dart';
 import 'package:uniguard_z/presentation/pages/activity_log/activity_log_page.dart';
 import 'package:uniguard_z/presentation/pages/change_password/change_password_page.dart';
+import 'package:uniguard_z/presentation/pages/forgot_password/forgot_password_page.dart';
 import 'package:uniguard_z/presentation/pages/forms/forms_page.dart';
 import 'package:uniguard_z/presentation/pages/profile/profile_page.dart';
 import 'package:uniguard_z/presentation/pages/form/form_page.dart';
@@ -82,6 +83,17 @@ Raw<GoRouter> router(RouterRef ref) => GoRouter(
               context,
               state,
               const LoginPage(),
+            );
+          },
+        ),
+        GoRoute(
+          path: Routes.FORGOT_PASSWORD,
+          name: "forgot-password",
+          pageBuilder: (context, state) {
+            return _buildPageWithFadeInOutTransition(
+              context,
+              state,
+              const ForgotPasswordPage(),
             );
           },
         ),
