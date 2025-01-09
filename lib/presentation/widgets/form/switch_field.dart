@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:uniguard_z/presentation/misc/colors.dart';
-import 'package:uniguard_z/presentation/misc/typography.dart';
 
 class SwitchField extends StatelessWidget {
   final String label;
@@ -17,12 +15,15 @@ class SwitchField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
+    final colorScheme = Theme.of(context).colorScheme;
+
     return Container(
       padding: const EdgeInsets.all(8),
       decoration: BoxDecoration(
-        color: AppColors.primarySoft,
+        color: colorScheme.secondary,
         borderRadius: BorderRadius.circular(8),
-        border: Border.all(color: AppColors.primaryExtraSoft, width: 4),
+        border: Border.all(color: colorScheme.tertiary, width: 4),
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -38,7 +39,10 @@ class SwitchField extends StatelessWidget {
                     ),
                   TextSpan(
                     text: label,
-                    style: Typogaphy.Medium,
+                    style: textTheme.labelMedium!.copyWith(
+                      fontWeight: FontWeight.w500,
+                      color: colorScheme.onPrimary,
+                    ),
                   ),
                 ],
               ),

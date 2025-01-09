@@ -57,11 +57,20 @@ class _ActivityPageState extends ConsumerState<ActivityPage> {
                     ),
                   ),
                 if (widget.activity.isPhoto == true)
-                  PhotoField<String>(
+                  // PhotoField<String>(
+                  //   label: "Photo",
+                  //   value: photoPath,
+                  //   onTap: () {
+                  //     _showImageSourceDialog();
+                  //   },
+                  // ),
+                  PhotoField2(
                     label: "Photo",
                     value: photoPath,
-                    onTap: () {
-                      _showImageSourceDialog();
+                    onImagePicked: (imagePath) {
+                      setState(() {
+                        photoPath = imagePath;
+                      });
                     },
                   ),
               ],

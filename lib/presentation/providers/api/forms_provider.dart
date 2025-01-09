@@ -17,6 +17,8 @@ class Forms extends _$Forms {
     GetForms getForms = ref.read(getFormsProvider);
     final result = await getForms(null);
 
+    if (!ref.exists(formsProvider)) return;
+
     switch (result) {
       case Success(value: final forms):
         state = AsyncData(forms);

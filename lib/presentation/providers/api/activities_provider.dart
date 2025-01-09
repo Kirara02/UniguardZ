@@ -17,6 +17,8 @@ class Activities extends _$Activities {
     GetActivities getActivities = ref.read(getActivitiesProvider);
     final result = await getActivities(null);
 
+    if (!ref.exists(activitiesProvider)) return;
+
     switch (result) {
       case Success(value: final activities):
         state = AsyncData(activities);

@@ -25,8 +25,15 @@ class _FormsPageState extends ConsumerState<FormsPage> {
   }
 
   @override
+  void dispose() {
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final forms = ref.watch(formsProvider);
+    final textTheme = Theme.of(context).textTheme;
+    final colorScheme = Theme.of(context).colorScheme;
 
     return Scaffold(
       body: CustomView(
@@ -46,8 +53,8 @@ class _FormsPageState extends ConsumerState<FormsPage> {
               const SizedBox(width: 8),
               Text(
                 "Forms",
-                style: Typogaphy.Medium.copyWith(
-                  fontSize: 14,
+                style: textTheme.titleMedium!.copyWith(
+                  fontWeight: FontWeight.w500,
                   color: Colors.white,
                 ),
               )
@@ -84,10 +91,12 @@ class _FormsPageState extends ConsumerState<FormsPage> {
                         child: Container(
                           padding: const EdgeInsets.all(12),
                           decoration: BoxDecoration(
-                            color: AppColors.primarySoft,
+                            color: colorScheme.secondary,
                             borderRadius: BorderRadius.circular(4),
                             border: Border.all(
-                                color: AppColors.primaryExtraSoft, width: 4),
+                              color: colorScheme.tertiary,
+                              width: 4,
+                            ),
                           ),
                           child: Row(
                             children: [

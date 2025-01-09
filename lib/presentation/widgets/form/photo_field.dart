@@ -129,14 +129,13 @@ class _PhotoField2State extends State<PhotoField2> {
   }
 
   Future<File?> _compressImage(CroppedFile croppedFile) async {
-    // Compress the image using flutter_image_compress
     final result = await FlutterImageCompress.compressWithFile(
       croppedFile.path,
-      minWidth: 800, // Resize width
-      minHeight: 600, // Resize height
-      quality: 75, // Compression quality (1-100)
-      rotate: 0, // Rotation if needed
-      format: CompressFormat.jpeg, // Compress to JPEG
+      minWidth: 800,
+      minHeight: 600,
+      quality: 75,
+      rotate: 0,
+      format: CompressFormat.jpeg,
     );
 
     if (result != null) {
@@ -163,29 +162,45 @@ class _PhotoField2State extends State<PhotoField2> {
 
   @override
   Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
+    final colorScheme = Theme.of(context).colorScheme;
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Container(
           padding: const EdgeInsets.all(8),
           decoration: BoxDecoration(
-            color: AppColors.primarySoft,
+            color: colorScheme.secondary,
             borderRadius: BorderRadius.circular(8),
-            border: Border.all(color: AppColors.primaryExtraSoft, width: 4),
+            border: Border.all(color: colorScheme.tertiary, width: 4),
           ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Row(
-                children: [
-                  if (widget.isRequired)
-                    const Text("* ", style: TextStyle(color: Colors.red)),
-                  Text(widget.label, style: Typogaphy.Medium),
-                ],
+              Expanded(
+                child: Text.rich(
+                  TextSpan(
+                    children: [
+                      if (widget.isRequired)
+                        const TextSpan(
+                          text: "* ",
+                          style: TextStyle(color: Colors.red),
+                        ),
+                      TextSpan(
+                        text: widget.label,
+                        style: textTheme.labelMedium!.copyWith(
+                          fontWeight: FontWeight.w500,
+                          color: colorScheme.onPrimary,
+                        ),
+                      ),
+                    ],
+                  ),
+                  softWrap: true, // Allow text wrapping
+                ),
               ),
               InkWell(
-                onTap: () => _showImageSourceDialog(
-                    context), // Buka dialog pemilihan sumber gambar
+                onTap: () => _showImageSourceDialog(context),
                 child: Container(
                   padding: const EdgeInsets.all(8),
                   decoration: BoxDecoration(color: AppColors.primaryExtraSoft),
@@ -202,7 +217,12 @@ class _PhotoField2State extends State<PhotoField2> {
         if (widget.value != null)
           Padding(
             padding: const EdgeInsets.only(top: 8.0),
-            child: Text('Selected Photo: ${widget.value}'),
+            child: Text(
+              'Selected Photo: ${widget.value}',
+              style: textTheme.labelMedium!.copyWith(
+                color: colorScheme.onPrimary,
+              ),
+            ),
           ),
       ],
     );

@@ -11,6 +11,7 @@ class AppTheme {
       primary: const Color.fromARGB(255, 233, 231, 231),
       secondary: AppColors.secondarySoft,
       tertiary: AppColors.secondaryExtraSoft,
+      tertiaryContainer: const Color.fromARGB(255, 80, 97, 212),
       surface: AppColors.light,
       surfaceBright: Colors.white,
     ),
@@ -37,6 +38,8 @@ class AppTheme {
     visualDensity: VisualDensity.adaptivePlatformDensity,
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
+        backgroundColor: AppColors.secondary,
+        foregroundColor: AppColors.light,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(8),
         ),
@@ -53,6 +56,7 @@ class AppTheme {
       primary: AppColors.primary,
       secondary: AppColors.primarySoft,
       tertiary: AppColors.primaryExtraSoft,
+      tertiaryContainer: const Color.fromARGB(255, 38, 28, 28),
       surface: AppColors.dark,
       surfaceBright: Colors.black,
     ),
@@ -80,11 +84,13 @@ class AppTheme {
     visualDensity: VisualDensity.adaptivePlatformDensity,
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
-        // backgroundColor: AppColors.secondary,
+        backgroundColor: AppColors.secondary,
+        foregroundColor: AppColors.light,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(8),
         ),
       ),
     ),
   );
+
 }

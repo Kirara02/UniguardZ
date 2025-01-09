@@ -25,44 +25,49 @@ class _HistorySectionState extends ConsumerState<HistorySection> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            ElevatedButton(
-              onPressed: () => _switchPage(0),
-              style: ElevatedButton.styleFrom(
-                backgroundColor: _currentPage == 0 ? Colors.blue : Colors.grey,
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(16, 20, 16, 0),
+      child: Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              ElevatedButton(
+                onPressed: () => _switchPage(0),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor:
+                      _currentPage == 0 ? Colors.blue : Colors.grey,
+                ),
+                child: const Text("Uploaded"),
               ),
-              child: const Text("Uploaded"),
-            ),
-            const SizedBox(width: 8),
-            ElevatedButton(
-              onPressed: () => _switchPage(1),
-              style: ElevatedButton.styleFrom(
-                backgroundColor: _currentPage == 1 ? Colors.blue : Colors.grey,
+              const SizedBox(width: 8),
+              ElevatedButton(
+                onPressed: () => _switchPage(1),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor:
+                      _currentPage == 1 ? Colors.blue : Colors.grey,
+                ),
+                child: const Text("Pending"),
               ),
-              child: const Text("Pending"),
-            ),
-          ],
-        ),
-        const SizedBox(height: 16),
-        Expanded(
-          child: PageView(
-            controller: _pageController,
-            onPageChanged: (pageIndex) {
-              setState(() {
-                _currentPage = pageIndex;
-              });
-            },
-            children: const [
-              Center(child: Text("Uploaded Page")),
-              Center(child: Text("Pending Page")),
             ],
           ),
-        ),
-      ],
+          const SizedBox(height: 16),
+          Expanded(
+            child: PageView(
+              controller: _pageController,
+              onPageChanged: (pageIndex) {
+                setState(() {
+                  _currentPage = pageIndex;
+                });
+              },
+              children: const [
+                Center(child: Text("Uploaded Page")),
+                Center(child: Text("Pending Page")),
+              ],
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:uniguard_z/presentation/misc/colors.dart';
-import 'package:uniguard_z/presentation/misc/typography.dart';
 
 class CustomTextField extends StatelessWidget {
   final String label;
@@ -19,22 +17,31 @@ class CustomTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
+    final colorScheme = Theme.of(context).colorScheme;
+
     return Container(
       padding: const EdgeInsets.all(8),
       decoration: BoxDecoration(
-        color: AppColors.primarySoft,
+        color: colorScheme.secondary,
         borderRadius: BorderRadius.circular(8),
-        border: Border.all(color: AppColors.primaryExtraSoft, width: 4),
+        border: Border.all(color: colorScheme.tertiary, width: 4),
       ),
       child: TextFormField(
         initialValue: value?.toString(),
         onChanged: (val) => onChanged(val),
         maxLines: maxLines,
         textInputAction: TextInputAction.next,
+        style: textTheme.labelMedium!.copyWith(
+          color: colorScheme.onPrimary,
+        ),
         decoration: InputDecoration(
-          contentPadding: const EdgeInsets.symmetric(horizontal: 4, vertical: 4),
+          contentPadding:
+              const EdgeInsets.symmetric(horizontal: 4, vertical: 4),
           hintText: (isRequired) ? "* $label" : label,
-          hintStyle: Typogaphy.Regular.copyWith(fontSize: 14),
+          hintStyle: textTheme.labelMedium!.copyWith(
+            color: colorScheme.onPrimary,
+          ),
           border: InputBorder.none,
         ),
         validator: (val) {

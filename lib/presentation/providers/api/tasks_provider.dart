@@ -18,6 +18,8 @@ class Tasks extends _$Tasks {
 
     final result = await getTasks(null);
 
+    if (!ref.exists(tasksProvider)) return;
+
     switch (result) {
       case Success(value: final tasks):
         state = AsyncData(tasks);

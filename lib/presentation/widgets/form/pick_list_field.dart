@@ -25,25 +25,41 @@ class PickListField<T> extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
+    final colorScheme = Theme.of(context).colorScheme;
+
     return Container(
       padding: const EdgeInsets.all(8),
       decoration: BoxDecoration(
-        color: AppColors.primarySoft,
+        color: colorScheme.secondary,
         borderRadius: BorderRadius.circular(8),
-        border: Border.all(color: AppColors.primaryExtraSoft, width: 4),
+        border: Border.all(color: colorScheme.tertiary, width: 4),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
-            children: [
-              if (isRequired) const Text("* ", style: TextStyle(color: Colors.red)),
-              Text(label, style: Typogaphy.Medium),
-            ],
+          Text.rich(
+            TextSpan(
+              children: [
+                if (isRequired)
+                  const TextSpan(
+                    text: "* ",
+                    style: TextStyle(color: Colors.red),
+                  ),
+                TextSpan(
+                  text: label,
+                  style: textTheme.labelMedium!.copyWith(
+                    fontWeight: FontWeight.w500,
+                    color: colorScheme.onPrimary,
+                  ),
+                ),
+              ],
+            ),
+            softWrap: true, // Allow text wrapping
           ),
           const SizedBox(height: 4),
           Container(
-            decoration: BoxDecoration(color: AppColors.dark),
+            decoration: BoxDecoration(color: colorScheme.tertiaryContainer),
             child: DropdownSearch<T>(
               popupProps: PopupProps.menu(
                 menuProps: MenuProps(
@@ -54,16 +70,22 @@ class PickListField<T> extends StatelessWidget {
                 fit: FlexFit.loose,
                 itemBuilder: (context, item, isSelected) {
                   return Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                     decoration: BoxDecoration(
                       border: Border(
-                        bottom: BorderSide(color: AppColors.primaryExtraSoft, width: 1),
+                        bottom: BorderSide(
+                          color: AppColors.primaryExtraSoft,
+                          width: 1,
+                        ),
                       ),
                     ),
                     child: Text(
                       itemAsString?.call(item) ?? item.toString(),
                       style: Typogaphy.Regular.copyWith(
-                          fontSize: 14, color: isSelected ? AppColors.secondary : Colors.white),
+                          fontSize: 14,
+                          color:
+                              isSelected ? AppColors.secondary : Colors.white),
                     ),
                   );
                 },
@@ -75,9 +97,12 @@ class PickListField<T> extends StatelessWidget {
               selectedItem: value,
               dropdownDecoratorProps: DropDownDecoratorProps(
                 dropdownSearchDecoration: InputDecoration(
-                  contentPadding: const EdgeInsets.symmetric(horizontal: 8, vertical: 14),
+                  contentPadding:
+                      const EdgeInsets.symmetric(horizontal: 8, vertical: 14),
                   hintText: hintText,
-                  hintStyle: Typogaphy.Regular.copyWith(fontSize: 14),
+                  hintStyle: textTheme.labelMedium!.copyWith(
+                    color: colorScheme.onPrimary,
+                  ),
                   border: InputBorder.none,
                 ),
               ),

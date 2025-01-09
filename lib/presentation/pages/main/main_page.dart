@@ -292,11 +292,13 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:uniguard_z/presentation/extensions/build_context_extension.dart';
 import 'package:uniguard_z/presentation/misc/app_routes.dart';
+import 'package:uniguard_z/presentation/misc/screen.dart';
 import 'package:uniguard_z/presentation/misc/typography.dart';
 import 'package:uniguard_z/presentation/pages/main/sections/history_section.dart';
 import 'package:uniguard_z/presentation/pages/main/sections/home_section.dart';
 import 'package:uniguard_z/presentation/providers/routes/router_provider.dart';
 import 'package:uniguard_z/presentation/providers/user_data/user_data_provider.dart';
+import 'package:uniguard_z/presentation/widgets/common/custom_view.dart';
 
 class MainPage extends ConsumerStatefulWidget {
   const MainPage({super.key});
@@ -327,14 +329,54 @@ class _MainPageState extends ConsumerState<MainPage> {
     );
 
     return Scaffold(
-      body: IndexedStack(
-        index: _currentPage,
-        children: _pages,
+      body: CustomView(
+        header: Container(
+          height: AppScreens.height * 0.1,
+          padding: const EdgeInsets.fromLTRB(16, 12, 16, 0),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Image.asset(
+                "assets/images/login_logo.png",
+                width: 120,
+              ),
+              Row(
+                children: [
+                  IconButton(
+                    onPressed: () {
+                      ref.read(routerProvider).push(Routes.SETTINGS);
+                    },
+                    icon: const FaIcon(
+                      FontAwesomeIcons.gear,
+                      size: 20,
+                      color: Colors.white,
+                    ),
+                  ),
+                  IconButton(
+                    onPressed: () {
+                      ref.read(userDataProvider.notifier).logout();
+                    },
+                    icon: const FaIcon(
+                      FontAwesomeIcons.arrowRightFromBracket,
+                      size: 20,
+                      color: Colors.white,
+                    ),
+                  )
+                ],
+              )
+            ],
+          ),
+        ),
+        body: IndexedStack(
+          index: _currentPage,
+          children: _pages,
+        ),
       ),
       backgroundColor: Theme.of(context).colorScheme.primary,
       floatingActionButton: FloatingActionButton(
         shape: const CircleBorder(),
-        onPressed: () {},
+        onPressed: () => ref.read(routerProvider).push(Routes.SCAN),
         child: Icon(
           Icons.fingerprint,
           color: Theme.of(context).colorScheme.onSurface,

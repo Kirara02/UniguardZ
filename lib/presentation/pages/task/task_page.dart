@@ -130,11 +130,20 @@ class _TaskPageState extends ConsumerState<TaskPage> {
 
   // Photo field (mockup as text)
   Widget _buildPhotoField(TaskField field) {
-    return PhotoField<String>(
+    // return PhotoField<String>(
+    //   label: field.name,
+    //   value: formValues[field.id],
+    //   onTap: () {
+    //     _showImageSourceDialog(field);
+    //   },
+    // );
+    return PhotoField2(
       label: field.name,
       value: formValues[field.id],
-      onTap: () {
-        _showImageSourceDialog(field);
+      onImagePicked: (imagePath) {
+        setState(() {
+          formValues[field.id] = imagePath;
+        });
       },
     );
   }
@@ -160,7 +169,8 @@ class _TaskPageState extends ConsumerState<TaskPage> {
 
     if (pickedFile != null) {
       setState(() {
-        formValues[field.id] = pickedFile.path; // Simpan path dari foto yang dipilih
+        formValues[field.id] =
+            pickedFile.path; // Simpan path dari foto yang dipilih
       });
     }
   }
@@ -216,7 +226,8 @@ class _TaskPageState extends ConsumerState<TaskPage> {
   }
 
   // Method to show signature dialog
-  void _showSignatureDialog(TaskField field, SignatureController signatureController) {
+  void _showSignatureDialog(
+      TaskField field, SignatureController signatureController) {
     showGeneralDialog(
       context: context,
       barrierDismissible: true,
@@ -226,7 +237,8 @@ class _TaskPageState extends ConsumerState<TaskPage> {
       },
       transitionDuration: const Duration(milliseconds: 300),
       transitionBuilder: (context, animation1, animation2, child) {
-        final curvedAnimation = CurvedAnimation(parent: animation1, curve: Curves.easeInOut);
+        final curvedAnimation =
+            CurvedAnimation(parent: animation1, curve: Curves.easeInOut);
 
         return ScaleTransition(
           scale: curvedAnimation,

@@ -1,13 +1,15 @@
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:signature/signature.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:uniguard_z/domain/entities/branch.dart';
 import 'package:uniguard_z/domain/entities/form_field.dart';
+import 'package:uniguard_z/presentation/misc/screen.dart';
+import 'package:uniguard_z/presentation/providers/routes/router_provider.dart';
+import 'package:uniguard_z/presentation/widgets/common/custom_view.dart';
 import 'package:uniguard_z/presentation/widgets/dialog/signature_dialog.dart';
-import 'package:uniguard_z/presentation/widgets/dialog/source_image_dialog.dart';
 import 'package:uniguard_z/presentation/widgets/form/photo_field.dart';
 import 'package:uniguard_z/presentation/widgets/form/pick_list_field.dart';
 import 'package:uniguard_z/presentation/widgets/form/signature_field.dart';
@@ -53,37 +55,60 @@ class _FormPageState extends ConsumerState<FormPage> {
 
   @override
   Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
+
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.branch.name),
-      ),
-      bottomNavigationBar: BottomAppBar(
-        child: Container(
-          padding: const EdgeInsets.symmetric(vertical: 4),
-          child: ElevatedButton(
-            onPressed: _showFormValues,
-            child: const Text("Submit"),
-          ),
+      resizeToAvoidBottomInset: true,
+      bottomNavigationBar: Container(
+        padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
+        child: ElevatedButton(
+          onPressed: _showFormValues,
+          child: const Text("Submit"),
         ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: SingleChildScrollView(
-          child: Form(
-            key: _key,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: widget.branch.formFields.map((field) {
-                return Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 8.0),
-                  child: _buildFormField(field),
-                );
-              }).toList(),
+      body: CustomView(
+        header: Container(
+          height: AppScreens.height * 0.1,
+          padding: const EdgeInsets.fromLTRB(16, 28, 16, 0),
+          child: Row(
+            children: [
+              IconButton(
+                onPressed: () => ref.read(routerProvider).pop(),
+                icon: const FaIcon(
+                  FontAwesomeIcons.arrowLeft,
+                  color: Colors.white,
+                  size: 20,
+                ),
+              ),
+              const SizedBox(width: 8),
+              Text(
+                "Forms",
+                style: textTheme.titleMedium!.copyWith(
+                  fontWeight: FontWeight.w500,
+                  color: Colors.white,
+                ),
+              )
+            ],
+          ),
+        ),
+        body: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: SingleChildScrollView(
+            child: Form(
+              key: _key,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: widget.branch.formFields.map((field) {
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 8.0),
+                    child: _buildFormField(field),
+                  );
+                }).toList(),
+              ),
             ),
           ),
         ),
       ),
-      resizeToAvoidBottomInset: true,
     );
   }
 
@@ -191,18 +216,6 @@ class _FormPageState extends ConsumerState<FormPage> {
     );
   }
 
-  // Fungsi untuk mengambil foto
-  Future<void> _pickImage(UFormField field, ImageSource source) async {
-    final picker = ImagePicker();
-    final pickedFile = await picker.pickImage(source: source);
-
-    if (pickedFile != null) {
-      setState(() {
-        formValues[field.id] =
-            pickedFile.path; // Simpan path dari foto yang dipilih
-      });
-    }
-  }
 
   // Menambahkan validasi saat submit
   void _showFormValues() {
@@ -303,19 +316,5 @@ class _FormPageState extends ConsumerState<FormPage> {
     });
   }
 
-  void _showImageSourceDialog(UFormField field) {
-    showModalBottomSheet(
-      context: context,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
-      ),
-      builder: (BuildContext context) {
-        return ImageSourceDialog(
-          onImageSourceSelected: (ImageSource source) {
-            _pickImage(field, source);
-          },
-        );
-      },
-    );
-  }
+  
 }
