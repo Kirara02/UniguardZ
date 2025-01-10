@@ -4,16 +4,23 @@ import 'package:uniguard_z/presentation/misc/colors.dart';
 class AppTheme {
   static final lightTheme = ThemeData(
     fontFamily: "Poppins",
-    colorScheme: ColorScheme.light(
-      primaryContainer: Colors.blue,
-      secondaryContainer: Colors.grey,
-      inversePrimary: const Color.fromARGB(255, 123, 122, 122),
-      primary: const Color.fromARGB(255, 233, 231, 231),
-      secondary: AppColors.secondarySoft,
-      tertiary: AppColors.secondaryExtraSoft,
-      tertiaryContainer: const Color.fromARGB(255, 80, 97, 212),
-      surface: AppColors.light,
-      surfaceBright: Colors.white,
+    // colorScheme: ColorScheme.light(
+    //   primaryContainer: Colors.blue,
+    //   secondaryContainer: Colors.grey,
+    //   inversePrimary: const Color.fromARGB(255, 123, 122, 122),
+    //   primary: const Color.fromARGB(255, 233, 231, 231),
+    //   secondary: AppColors.secondarySoft,
+    //   tertiary: AppColors.secondaryExtraSoft,
+    //   tertiaryContainer: const Color.fromARGB(255, 80, 97, 212),
+    //   surface: AppColors.light,
+    //   surfaceBright: Colors.white,
+    // ),
+    colorScheme: ColorScheme.fromSeed(
+      seedColor: const Color(0xff2897FF),
+      brightness: Brightness.light,
+      primary: const Color(0xff2897FF),
+      surface: Colors.white,
+      surfaceContainer: const Color(0xffFAFAFA),
     ),
     iconTheme: IconThemeData(color: AppColors.dark),
     textTheme: TextTheme(
@@ -49,16 +56,23 @@ class AppTheme {
 
   static final darkTheme = ThemeData(
     fontFamily: "Poppins",
-    colorScheme: ColorScheme.dark(
-      primaryContainer: AppColors.dark,
-      secondaryContainer: Colors.grey,
-      inversePrimary: const Color.fromARGB(255, 199, 197, 197),
-      primary: AppColors.primary,
-      secondary: AppColors.primarySoft,
-      tertiary: AppColors.primaryExtraSoft,
-      tertiaryContainer: const Color.fromARGB(255, 38, 28, 28),
-      surface: AppColors.dark,
-      surfaceBright: Colors.black,
+    // colorScheme: ColorScheme.dark(
+    //   primaryContainer: AppColors.dark,
+    //   secondaryContainer: Colors.grey,
+    //   inversePrimary: const Color.fromARGB(255, 199, 197, 197),
+    //   primary: AppColors.primary,
+    //   secondary: AppColors.primarySoft,
+    //   tertiary: AppColors.primaryExtraSoft,
+    //   tertiaryContainer: const Color.fromARGB(255, 38, 28, 28),
+    //   surface: AppColors.dark,
+    //   surfaceBright: Colors.black,
+    // ),
+    colorScheme: ColorScheme.fromSeed(
+      seedColor: const Color(0xFF212129),
+      brightness: Brightness.dark,
+      surface: const Color(0xFF212129),
+      primary: const Color(0xFF212121),
+      surfaceContainer: const Color(0xFF1E1E1E),
     ),
     iconTheme: IconThemeData(color: AppColors.light),
     textTheme: TextTheme(
@@ -92,5 +106,4 @@ class AppTheme {
       ),
     ),
   );
-
 }

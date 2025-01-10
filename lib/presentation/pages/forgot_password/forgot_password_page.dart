@@ -28,65 +28,72 @@ class _ForgotPasswordPageState extends ConsumerState<ForgotPasswordPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: true,
-      backgroundColor: Theme.of(context).colorScheme.primary,
+      backgroundColor: context.colorScheme.surface,
       body: Stack(
         children: [
-          Center(
-            child: SingleChildScrollView(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: Form(
-                key: _formKey,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Container(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 20, vertical: 28),
-                      decoration: BoxDecoration(
-                        color: Theme.of(context).colorScheme.surface,
-                        borderRadius: BorderRadius.circular(12),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
+            child: Form(
+              key: _formKey,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Column(
+                    children: [
+                      SizedBox(
+                        height: 180,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Image.asset(
+                              "assets/images/uniguard_icon.png",
+                              width: 60,
+                              color: Colors.blue,
+                            ),
+                            const SizedBox(width: 20),
+                            Text(
+                              "UNIGUARD",
+                              style: context.textTheme.headlineLarge!.copyWith(
+                                fontWeight: FontWeight.bold,
+                                letterSpacing: 1.5,
+                              ),
+                            )
+                          ],
+                        ),
                       ),
-                      child: Column(
-                        children: [
-                          Image.asset(
-                            "assets/images/login_logo.png",
-                            height: 58,
-                            color: Theme.of(context).colorScheme.onSurface,
-                          ),
-                          const SizedBox(height: 36),
-                          UGTextField(
-                            controller: _emailController,
-                            label: AppLocalizations.of(context)!.email,
-                            hintText: "user@mail.com",
-                            keyboardType: TextInputType.text,
-                            textInputAction: TextInputAction.next,
-                            validator: (value) {
-                              if (value == null || value.isEmpty) {
-                                return 'Please enter your email';
-                              }
-                              // const emailPattern =
-                              //     r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$';
-                              // final regExp = RegExp(emailPattern);
-                              // if (!regExp.hasMatch(value)) {
-                              //   return 'Please enter a valid email address';
-                              // }
-                              return null;
-                            },
-                          ),
-                          const SizedBox(height: 16),
-                          CustomButton(
-                            fullwidth: true,
-                            title: AppLocalizations.of(context)!.submit,
-                            onPressed: () async {
-                              context.hideKeyboard();
-                              if (_formKey.currentState!.validate()) {}
-                            },
-                          ),
-                        ],
+                      const SizedBox(height: 36),
+                      UGTextField(
+                        controller: _emailController,
+                        label: AppLocalizations.of(context)!.email,
+                        hintText: "user@mail.com",
+                        keyboardType: TextInputType.text,
+                        textInputAction: TextInputAction.next,
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please enter your email';
+                          }
+                          // const emailPattern =
+                          //     r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$';
+                          // final regExp = RegExp(emailPattern);
+                          // if (!regExp.hasMatch(value)) {
+                          //   return 'Please enter a valid email address';
+                          // }
+                          return null;
+                        },
                       ),
-                    ),
-                  ],
-                ),
+                      const SizedBox(height: 16),
+                      CustomButton(
+                        fullwidth: true,
+                        title: AppLocalizations.of(context)!.submit,
+                        onPressed: () async {
+                          context.hideKeyboard();
+                          if (_formKey.currentState!.validate()) {}
+                        },
+                      ),
+                      const Divider(height: 50),
+                    ],
+                  ),
+                ],
               ),
             ),
           ),
@@ -106,9 +113,9 @@ class _ForgotPasswordPageState extends ConsumerState<ForgotPasswordPage> {
                 const SizedBox(width: 12),
                 Text(
                   AppLocalizations.of(context)!.forgot_password,
-                  style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                        fontWeight: FontWeight.w500,
-                      ),
+                  style: context.textTheme.titleMedium!.copyWith(
+                    fontWeight: FontWeight.w500,
+                  ),
                 ),
               ],
             ),

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:uniguard_z/presentation/extensions/build_context_extension.dart';
+import 'package:uniguard_z/presentation/misc/colors.dart';
 
 class SwitchField extends StatelessWidget {
   final String label;
@@ -15,8 +17,8 @@ class SwitchField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final textTheme = Theme.of(context).textTheme;
-    final colorScheme = Theme.of(context).colorScheme;
+    final textTheme = context.textTheme;
+    final colorScheme = context.colorScheme;
 
     return Container(
       padding: const EdgeInsets.all(8),
@@ -41,7 +43,7 @@ class SwitchField extends StatelessWidget {
                     text: label,
                     style: textTheme.labelMedium!.copyWith(
                       fontWeight: FontWeight.w500,
-                      color: colorScheme.onPrimary,
+                      color: AppColors.light,
                     ),
                   ),
                 ],

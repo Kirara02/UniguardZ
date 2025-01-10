@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:uniguard_z/presentation/extensions/build_context_extension.dart';
+import 'package:uniguard_z/presentation/misc/colors.dart';
 
 class UGTextField extends StatefulWidget {
   final String label;
@@ -48,16 +50,15 @@ class _UGTextFieldState extends State<UGTextField> {
 
   @override
   Widget build(BuildContext context) {
-    final colorScheme = Theme.of(context).colorScheme;
-    final textTheme = Theme.of(context).textTheme;
+    final colorScheme = context.colorScheme;
+    final textTheme = context.textTheme;
 
     return Container(
       width: MediaQuery.of(context).size.width,
       padding: const EdgeInsets.only(left: 14, right: 14, top: 4),
       decoration: BoxDecoration(
-        // color: colorScheme.secondaryContainer,
-        borderRadius: BorderRadius.circular(8),
-        border: Border.all(width: 1, color: colorScheme.secondaryContainer),
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(width: 1, color: colorScheme.outline),
       ),
       child: TextFormField(
         controller: widget.controller,
@@ -73,10 +74,10 @@ class _UGTextFieldState extends State<UGTextField> {
         decoration: InputDecoration(
           labelText: widget.label,
           labelStyle: textTheme.labelMedium!.copyWith(
-            color: colorScheme.inversePrimary,
+            color: AppColors.hintText,
             fontWeight: FontWeight.w500,
           ),
-          floatingLabelBehavior: FloatingLabelBehavior.always,
+          // floatingLabelBehavior: FloatingLabelBehavior.always,
           border: InputBorder.none,
           hintText: widget.hintText,
           hintStyle: textTheme.bodySmall!.copyWith(

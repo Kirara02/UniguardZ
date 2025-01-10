@@ -27,7 +27,7 @@ class SplashPage extends ConsumerWidget {
     );
 
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.primary,
+      backgroundColor: context.colorScheme.surface,
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -35,7 +35,7 @@ class SplashPage extends ConsumerWidget {
             child: SvgPicture.asset(
               "assets/icons/uniguard.svg",
               colorFilter: ColorFilter.mode(
-                Theme.of(context).colorScheme.onSurface,
+                context.colorScheme.onSurface,
                 BlendMode.srcIn,
               ),
             ),

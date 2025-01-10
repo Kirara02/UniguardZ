@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:uniguard_z/presentation/extensions/build_context_extension.dart';
 import 'package:uniguard_z/presentation/misc/screen.dart';
 
 class CustomView extends StatelessWidget {
@@ -8,12 +9,12 @@ class CustomView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final colorScheme = Theme.of(context).colorScheme;
+    final colorScheme = context.colorScheme;
 
     return Container(
       height: AppScreens.height,
       decoration: BoxDecoration(
-        color: colorScheme.primaryContainer,
+        color: colorScheme.primary,
       ),
       child: Column(
         children: [
@@ -22,7 +23,7 @@ class CustomView extends StatelessWidget {
             child: Container(
               width: double.infinity,
               decoration: BoxDecoration(
-                color: colorScheme.primary,
+                color: colorScheme.surfaceContainer,
                 borderRadius: const BorderRadius.vertical(
                   top: Radius.circular(16),
                 ),

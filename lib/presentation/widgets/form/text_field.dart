@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:uniguard_z/presentation/extensions/build_context_extension.dart';
+import 'package:uniguard_z/presentation/misc/colors.dart';
 
 class CustomTextField extends StatelessWidget {
   final String label;
@@ -17,8 +19,8 @@ class CustomTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final textTheme = Theme.of(context).textTheme;
-    final colorScheme = Theme.of(context).colorScheme;
+    final textTheme = context.textTheme;
+    final colorScheme = context.colorScheme;
 
     return Container(
       padding: const EdgeInsets.all(8),
@@ -33,14 +35,14 @@ class CustomTextField extends StatelessWidget {
         maxLines: maxLines,
         textInputAction: TextInputAction.next,
         style: textTheme.labelMedium!.copyWith(
-          color: colorScheme.onPrimary,
+          color: AppColors.light,
         ),
         decoration: InputDecoration(
           contentPadding:
               const EdgeInsets.symmetric(horizontal: 4, vertical: 4),
           hintText: (isRequired) ? "* $label" : label,
           hintStyle: textTheme.labelMedium!.copyWith(
-            color: colorScheme.onPrimary,
+            color: AppColors.light,
           ),
           border: InputBorder.none,
         ),

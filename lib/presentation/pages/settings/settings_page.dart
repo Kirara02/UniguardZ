@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:uniguard_z/presentation/extensions/build_context_extension.dart';
 import 'package:uniguard_z/presentation/misc/app_routes.dart';
 import 'package:uniguard_z/presentation/misc/colors.dart';
 import 'package:uniguard_z/presentation/misc/screen.dart';
@@ -19,8 +20,8 @@ class SettingsPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final localeNotifier = ref.read(localeProvider.notifier);
     final themeRef = ref.watch(appThemeProvider);
-    final colorScheme = Theme.of(context).colorScheme;
-    final textTheme = Theme.of(context).textTheme;
+    final colorScheme = context.colorScheme;
+    final textTheme = context.textTheme;
 
     final List<SettingGroup> _settingItems = [
       SettingGroup(
@@ -47,10 +48,9 @@ class SettingsPage extends ConsumerWidget {
                       children: [
                         Text(
                           AppLocalizations.of(context)!.choose_language,
-                          style:
-                              Theme.of(context).textTheme.titleLarge!.copyWith(
-                                    fontWeight: FontWeight.bold,
-                                  ),
+                          style: context.textTheme.titleLarge!.copyWith(
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                         const SizedBox(height: 16),
                         ListTile(

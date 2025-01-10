@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:signature/signature.dart';
+import 'package:uniguard_z/presentation/extensions/build_context_extension.dart';
 import 'package:uniguard_z/presentation/misc/colors.dart';
 
 class SignatureField extends StatelessWidget {
@@ -17,8 +18,8 @@ class SignatureField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final textTheme = Theme.of(context).textTheme;
-    final colorScheme = Theme.of(context).colorScheme;
+    final textTheme = context.textTheme;
+    final colorScheme = context.colorScheme;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -46,7 +47,7 @@ class SignatureField extends StatelessWidget {
                         text: label,
                         style: textTheme.labelMedium!.copyWith(
                           fontWeight: FontWeight.w500,
-                          color: colorScheme.onPrimary,
+                          color: AppColors.light,
                         ),
                       ),
                     ],

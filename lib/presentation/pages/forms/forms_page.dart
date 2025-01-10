@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:uniguard_z/presentation/extensions/build_context_extension.dart';
 import 'package:uniguard_z/presentation/misc/app_routes.dart';
 import 'package:uniguard_z/presentation/misc/colors.dart';
 import 'package:uniguard_z/presentation/misc/screen.dart';
@@ -32,8 +33,8 @@ class _FormsPageState extends ConsumerState<FormsPage> {
   @override
   Widget build(BuildContext context) {
     final forms = ref.watch(formsProvider);
-    final textTheme = Theme.of(context).textTheme;
-    final colorScheme = Theme.of(context).colorScheme;
+    final textTheme = context.textTheme;
+    final colorScheme = context.colorScheme;
 
     return Scaffold(
       body: CustomView(

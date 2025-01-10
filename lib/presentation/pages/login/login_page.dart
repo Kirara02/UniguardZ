@@ -301,100 +301,104 @@ class _LoginPageState extends ConsumerState<LoginPage>
 
     return Scaffold(
       resizeToAvoidBottomInset: true,
-      backgroundColor: Theme.of(context).colorScheme.primary,
-      body: Center(
-        child: SingleChildScrollView(
-          padding: const EdgeInsets.symmetric(horizontal: 16),
-          child: Form(
-            key: _formKey,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Container(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 20, vertical: 28),
-                  decoration: BoxDecoration(
-                    color: Theme.of(context).colorScheme.surface,
-                    borderRadius: BorderRadius.circular(12),
+      backgroundColor: context.colorScheme.surface,
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
+        child: Form(
+          key: _formKey,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              Column(
+                children: [
+                  SizedBox(
+                    height: 180,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Image.asset(
+                          "assets/images/uniguard_icon.png",
+                          width: 60,
+                          color: Colors.blue,
+                        ),
+                        const SizedBox(width: 20),
+                        Text(
+                          "UNIGUARD",
+                          style: context.textTheme.headlineLarge!.copyWith(
+                            fontWeight: FontWeight.bold,
+                            letterSpacing: 1.5,
+                          ),
+                        )
+                      ],
+                    ),
                   ),
-                  child: Column(
-                    children: [
-                      Image.asset(
-                        "assets/images/login_logo.png",
-                        height: 58,
-                        color: Theme.of(context).colorScheme.onSurface,
-                      ),
-                      const SizedBox(height: 36),
-                      UGTextField(
-                        controller: _emailController,
-                        label: AppLocalizations.of(context)!.email,
-                        hintText: "user@mail.com",
-                        keyboardType: TextInputType.text,
-                        textInputAction: TextInputAction.next,
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Please enter your email';
-                          }
-                          // const emailPattern =
-                          //     r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$';
-                          // final regExp = RegExp(emailPattern);
-                          // if (!regExp.hasMatch(value)) {
-                          //   return 'Please enter a valid email address';
-                          // }
-                          return null;
-                        },
-                      ),
-                      const SizedBox(height: 12),
-                      UGTextField(
-                        controller: _passwordController,
-                        label: AppLocalizations.of(context)!.password,
-                        hintText: "********",
-                        obscureText: true,
-                        keyboardType: TextInputType.text,
-                        textInputAction: TextInputAction.go,
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Please enter your password';
-                          }
-                          return null;
-                        },
-                      ),
-                      const SizedBox(height: 8),
-                      Align(
-                        alignment: Alignment.centerRight,
-                        child: GestureDetector(
-                          onTap: () => ref
-                              .read(routerProvider)
-                              .push(Routes.FORGOT_PASSWORD),
-                          child: Text(
-                            "${AppLocalizations.of(context)!.forgot_password}?",
-                            style: Theme.of(context)
-                                .textTheme
-                                .labelMedium!
-                                .copyWith(
+                  const SizedBox(height: 36),
+                  UGTextField(
+                    controller: _emailController,
+                    label: AppLocalizations.of(context)!.email,
+                    hintText: "user@mail.com",
+                    keyboardType: TextInputType.text,
+                    textInputAction: TextInputAction.next,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please enter your email';
+                      }
+                      // const emailPattern =
+                      //     r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$';
+                      // final regExp = RegExp(emailPattern);
+                      // if (!regExp.hasMatch(value)) {
+                      //   return 'Please enter a valid email address';
+                      // }
+                      return null;
+                    },
+                  ),
+                  const SizedBox(height: 12),
+                  UGTextField(
+                    controller: _passwordController,
+                    label: AppLocalizations.of(context)!.password,
+                    hintText: "********",
+                    obscureText: true,
+                    keyboardType: TextInputType.text,
+                    textInputAction: TextInputAction.go,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please enter your password';
+                      }
+                      return null;
+                    },
+                  ),
+                  const SizedBox(height: 16),
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: GestureDetector(
+                      onTap: () =>
+                          ref.read(routerProvider).push(Routes.FORGOT_PASSWORD),
+                      child: Text(
+                        "${AppLocalizations.of(context)!.forgot_password}?",
+                        style:
+                            Theme.of(context).textTheme.labelMedium!.copyWith(
                                   fontWeight: FontWeight.w500,
                                 ),
-                          ),
-                        ),
                       ),
-                      const SizedBox(height: 16),
-                      CustomButton(
-                        fullwidth: true,
-                        title: AppLocalizations.of(context)!.login,
-                        onPressed: () async {
-                          context.hideKeyboard();
-                          if (_formKey.currentState!.validate()) {
-                            ref.read(userDataProvider.notifier).login(
-                                email: _emailController.text,
-                                password: _passwordController.text);
-                          }
-                        },
-                      ),
-                    ],
+                    ),
                   ),
-                ),
-              ],
-            ),
+                  const SizedBox(height: 16),
+                  CustomButton(
+                    fullwidth: true,
+                    title: AppLocalizations.of(context)!.login,
+                    onPressed: () async {
+                      context.hideKeyboard();
+                      if (_formKey.currentState!.validate()) {
+                        ref.read(userDataProvider.notifier).login(
+                            email: _emailController.text,
+                            password: _passwordController.text);
+                      }
+                    },
+                  ),
+                  const Divider(height: 50),
+                ],
+              ),
+            ],
           ),
         ),
       ),

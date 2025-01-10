@@ -28,6 +28,7 @@ class MainApp extends ConsumerWidget {
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
       ],
+      
       locale: ref.watch(localeProvider),
       supportedLocales: AppLocalizations.supportedLocales,
       theme: AppTheme.lightTheme,

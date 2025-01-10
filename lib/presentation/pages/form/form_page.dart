@@ -6,6 +6,7 @@ import 'package:signature/signature.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:uniguard_z/domain/entities/branch.dart';
 import 'package:uniguard_z/domain/entities/form_field.dart';
+import 'package:uniguard_z/presentation/extensions/build_context_extension.dart';
 import 'package:uniguard_z/presentation/misc/screen.dart';
 import 'package:uniguard_z/presentation/providers/routes/router_provider.dart';
 import 'package:uniguard_z/presentation/widgets/common/custom_view.dart';
@@ -55,7 +56,7 @@ class _FormPageState extends ConsumerState<FormPage> {
 
   @override
   Widget build(BuildContext context) {
-    final textTheme = Theme.of(context).textTheme;
+    final textTheme = context.textTheme;
 
     return Scaffold(
       resizeToAvoidBottomInset: true,
@@ -216,7 +217,6 @@ class _FormPageState extends ConsumerState<FormPage> {
     );
   }
 
-
   // Menambahkan validasi saat submit
   void _showFormValues() {
     if (_key.currentState?.validate() ?? false) {
@@ -315,6 +315,4 @@ class _FormPageState extends ConsumerState<FormPage> {
       }
     });
   }
-
-  
 }

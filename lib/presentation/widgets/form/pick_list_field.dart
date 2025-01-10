@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:dropdown_search/dropdown_search.dart';
+import 'package:uniguard_z/presentation/extensions/build_context_extension.dart';
 import 'package:uniguard_z/presentation/misc/colors.dart';
 import 'package:uniguard_z/presentation/misc/typography.dart';
 
@@ -25,8 +26,8 @@ class PickListField<T> extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final textTheme = Theme.of(context).textTheme;
-    final colorScheme = Theme.of(context).colorScheme;
+    final textTheme = context.textTheme;
+    final colorScheme = context.colorScheme;
 
     return Container(
       padding: const EdgeInsets.all(8),
@@ -50,7 +51,7 @@ class PickListField<T> extends StatelessWidget {
                   text: label,
                   style: textTheme.labelMedium!.copyWith(
                     fontWeight: FontWeight.w500,
-                    color: colorScheme.onPrimary,
+                    color: AppColors.light,
                   ),
                 ),
               ],
@@ -63,7 +64,7 @@ class PickListField<T> extends StatelessWidget {
             child: DropdownSearch<T>(
               popupProps: PopupProps.menu(
                 menuProps: MenuProps(
-                  backgroundColor: AppColors.primarySoft,
+                  backgroundColor: colorScheme.surfaceContainer,
                 ),
                 showSearchBox: false,
                 showSelectedItems: true,
@@ -75,7 +76,7 @@ class PickListField<T> extends StatelessWidget {
                     decoration: BoxDecoration(
                       border: Border(
                         bottom: BorderSide(
-                          color: AppColors.primaryExtraSoft,
+                          color: colorScheme.outline,
                           width: 1,
                         ),
                       ),
@@ -85,7 +86,7 @@ class PickListField<T> extends StatelessWidget {
                       style: Typogaphy.Regular.copyWith(
                           fontSize: 14,
                           color:
-                              isSelected ? AppColors.secondary : Colors.white),
+                              isSelected ? Colors.blue : colorScheme.onSurface),
                     ),
                   );
                 },
@@ -96,13 +97,17 @@ class PickListField<T> extends StatelessWidget {
               onChanged: onChanged,
               selectedItem: value,
               dropdownDecoratorProps: DropDownDecoratorProps(
+                baseStyle: context.textTheme.labelMedium!.copyWith(
+                  color: AppColors.light,
+                ),
                 dropdownSearchDecoration: InputDecoration(
                   contentPadding:
                       const EdgeInsets.symmetric(horizontal: 8, vertical: 14),
                   hintText: hintText,
                   hintStyle: textTheme.labelMedium!.copyWith(
-                    color: colorScheme.onPrimary,
+                    color: AppColors.light,
                   ),
+                  suffixIconColor: AppColors.light,
                   border: InputBorder.none,
                 ),
               ),

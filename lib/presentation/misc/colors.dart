@@ -4,7 +4,7 @@ class AppColors {
   static Color primary = const Color(0xFF212121);
   static Color primarySoft = const Color(0xFF272727);
   static Color primaryExtraSoft = const Color(0xFF605D5D);
-  static Color secondary = const Color(0xff2d44ea);
+  static Color secondary = const Color(0xff2897FF);
   static Color secondarySoft = const Color(0xff6674cc);
   static Color secondaryExtraSoft = const Color(0xFFC1C1C1);
   static Color dark = const Color(0xFF1E1E1E);
@@ -13,6 +13,9 @@ class AppColors {
   static Color error = const Color(0xFFD00E0E);
   static Color success = const Color(0xFF16AE26);
   static Color warning = const Color(0xFFEB8600);
+  static Color neutral = const Color(0xffC5C6CC);
+  static Color hintText = const Color(0xff8F9098);
+  static Color hint = const Color(0xff9E9EA4);
 }
 
 // class AppColors {

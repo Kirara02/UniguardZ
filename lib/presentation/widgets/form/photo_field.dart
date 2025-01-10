@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:uniguard_z/presentation/extensions/build_context_extension.dart';
 import 'package:uniguard_z/presentation/misc/colors.dart';
 import 'package:uniguard_z/presentation/misc/typography.dart';
 import 'package:uniguard_z/presentation/widgets/dialog/source_image_dialog.dart';
@@ -162,8 +163,8 @@ class _PhotoField2State extends State<PhotoField2> {
 
   @override
   Widget build(BuildContext context) {
-    final textTheme = Theme.of(context).textTheme;
-    final colorScheme = Theme.of(context).colorScheme;
+    final textTheme = context.textTheme;
+    final colorScheme = context.colorScheme;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -191,7 +192,7 @@ class _PhotoField2State extends State<PhotoField2> {
                         text: widget.label,
                         style: textTheme.labelMedium!.copyWith(
                           fontWeight: FontWeight.w500,
-                          color: colorScheme.onPrimary,
+                          color: AppColors.light,
                         ),
                       ),
                     ],
